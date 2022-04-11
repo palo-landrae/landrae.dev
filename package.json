@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "cacheDirectories": [
+    ".next/cache"
+  ],
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@prisma/client": "^3.12.0",

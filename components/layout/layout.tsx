@@ -4,12 +4,15 @@ import { Footer } from "./footer";
 import { Spacer } from "./spacer";
 
 export const Layout = ({ children, title }) => {
-  const customTitle = `${title} - Palo Landrae`;
+  const customTitle = `${title} - Landrae`;
   return (
     <>
       <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Landrae's personal webpage" />
+        <meta name="author" content="Loui Andrae Palo" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <title>{customTitle}</title>
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col min-h-screen">
         <Navbar />
