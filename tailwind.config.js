@@ -4,7 +4,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        mplusrounded: ["'M Plus Rounded 1c'"],
+        kodchasan: ["'Kodchasan'"],
+      },
+    },
   },
   plugins: [],
 };

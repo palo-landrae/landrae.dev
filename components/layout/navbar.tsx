@@ -20,7 +20,7 @@ export const Navbar = (): JSX.Element => {
   ];
   return (
     <nav>
-      <div className="flex max-w-3xl mx-auto py-4 px-6">
+      <div className="flex max-w-3xl mx-auto py-4 px-6 font-mplusrounded font-normal">
         <span className="text-lg">Landrae</span>
         <Spacer />
         {links.map(({ name, href }) => (
