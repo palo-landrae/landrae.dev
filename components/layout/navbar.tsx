@@ -21,7 +21,9 @@ export const Navbar = (): JSX.Element => {
   return (
     <nav>
       <div className="flex max-w-3xl mx-auto py-4 px-6 font-mplusrounded font-normal">
-        <span className="text-lg">Landrae</span>
+        <Link href="/">
+          <a className="text-lg">Landrae</a>
+        </Link>
         <Spacer />
         {links.map(({ name, href }) => (
           <Link key={href} href={href}>
