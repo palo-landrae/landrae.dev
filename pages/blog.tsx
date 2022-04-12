@@ -6,6 +6,7 @@ import { Layout } from "@/components/layout";
 import { IPost } from "@/models/blog-post";
 import moment from "moment";
 import Link from "next/link";
+import { LikeButton } from "@lyket/react";
 
 export interface Props {
   posts: IPost[];
@@ -20,12 +21,17 @@ const Blog: NextPage<Props> = ({ posts }) => {
             return (
               <div className="p-6 w-full" key={post.slug}>
                 <div className="flex flex-col-reverse md:flex-row justify-items-center md:justify-around items-start mx-auto">
-                  <div className="pr-3 w-full">
-                    <p className="text-sm py-1">
+                  <div className="py-2 md:py-0 pr-3 w-full">
+                    <span className="text-sm mr-4">
                       Posted on {moment(post.date).format("LL")}
-                    </p>
+                    </span>
+                    <LikeButton id={post.slug} namespace="blog">
+                      {({ totalLikes }) => (
+                        <span className="text-sm">{totalLikes} likes</span>
+                      )}
+                    </LikeButton>
                     <h1 className="text-xl">{post.title}</h1>
-                    <p className="mb-4 h-20 line-clamp-3">{post.description}</p>
+                    <p className="mb-4 line-clamp-3">{post.description}</p>
                     <Link href={`/blog/${post.slug}`}>
                       <a className="underline underline-offset-4">Read More</a>
                     </Link>

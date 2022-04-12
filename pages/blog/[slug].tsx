@@ -9,6 +9,8 @@ import ReactMarkdown from "react-markdown";
 import { default as oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 import moment from "moment";
 import Image from "next/image";
+import { TwitterHeartIcon, TwitterHeartEmptyIcon } from "@/components/icons";
+import { LikeButton } from "@lyket/react";
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -32,21 +34,43 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
                 objectFit="cover"
               />
             </div>
-            <div className="flex py-3 items-center space-x-2">
-              <div className="w-12 h-12 relative">
-                <Image
-                  className="rounded-full"
-                  alt="Blog post image"
-                  src="/images/profile.jpg"
-                  layout="fill"
-                  objectFit="cover"
-                />
+            <div className="inline-flex justify-between items-center py-3">
+              <div className="inline-flex items-center space-x-2">
+                <div className="w-12 h-12 relative">
+                  <Image
+                    className="rounded-full"
+                    alt="Blog post image"
+                    src="/images/profile.jpg"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <strong className="text-lg">palo-landrae</strong>
+                  <span className="text-sm">
+                    Posted on {moment(post.date).format("LL")}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col">
-                <strong className="text-lg">palo-landrae</strong>
-                <span className="text-sm">
-                  Posted on {moment(post.date).format("LL")}
-                </span>
+              <div className="inline-flex mx-2 items-center">
+                <LikeButton id={post.slug} namespace="blog">
+                  {({ handlePress, totalLikes, userLiked, isLoading }) => (
+                    <button
+                      onClick={handlePress}
+                      disabled={isLoading}
+                      className="inline-flex items-center space-x-2"
+                    >
+                      <div className="w-7 h-7 self-center">
+                        {userLiked ? (
+                          <TwitterHeartIcon />
+                        ) : (
+                          <TwitterHeartEmptyIcon />
+                        )}
+                      </div>
+                      <span className="text-lg">{totalLikes}</span>
+                    </button>
+                  )}
+                </LikeButton>
               </div>
             </div>
             <ReactMarkdown components={{ code: CodeBlock }}>
