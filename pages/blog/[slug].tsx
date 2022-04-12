@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Post } from "@/models/blog-post";
+import { IPost } from "@/models/blog-post";
 import { prisma } from "@/lib/prisma";
 import { Layout } from "@/components/layout";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -14,11 +14,11 @@ interface IParams extends ParsedUrlQuery {
   slug: string;
 }
 
-interface BlogPostProps {
-  post: Post;
+interface IProps {
+  post: IPost;
 }
 
-const BlogPost: NextPage<BlogPostProps> = ({ post }) => {
+const BlogPost: NextPage<IProps> = ({ post }) => {
   return (
     <Layout title={post.title}>
       <div>

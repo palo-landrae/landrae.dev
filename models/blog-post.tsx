@@ -1,8 +1,4 @@
-export interface PostProps {
-  posts: Post[];
-}
-
-export interface Post {
+export interface IPost {
   id: string;
   title: string;
   description: string;

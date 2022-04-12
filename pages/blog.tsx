@@ -3,11 +3,15 @@ import Image from "next/image";
 import { GetStaticProps } from "next";
 import { prisma } from "@/lib/prisma";
 import { Layout } from "@/components/layout";
-import { PostProps, Post } from "@/models/blog-post";
+import { IPost } from "@/models/blog-post";
 import moment from "moment";
 import Link from "next/link";
 
-const Blog: NextPage = ({ posts }: PostProps) => {
+export interface Props {
+  posts: IPost[];
+}
+
+const Blog: NextPage<Props> = ({ posts }) => {
   return (
     <Layout title="Blog">
       <div className="flex flex-col max-w-3xl w-full mx-auto">
@@ -46,7 +50,7 @@ const Blog: NextPage = ({ posts }: PostProps) => {
 export default Blog;
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  const posts: Post[] = await prisma.blog.findMany({
+  const posts: IPost[] = await prisma.blog.findMany({
     select: {
       id: true,
       title: true,
