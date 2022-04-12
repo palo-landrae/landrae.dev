@@ -1,9 +1,15 @@
+import React from "react";
 import Head from "next/head";
 import { Navbar } from "./navbar";
 import { Footer } from "./footer";
 import { Spacer } from "./spacer";
 
-export const Layout = ({ children, title }) => {
+interface LayoutProps {
+  children: React.ReactNode;
+  title: string;
+}
+
+export const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   const customTitle = `${title} - Landrae`;
   return (
     <>
