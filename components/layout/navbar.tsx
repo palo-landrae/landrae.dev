@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Spacer } from "./spacer";
 import { useRouter } from "next/router";
+import { isActiveLink } from "@/lib/utils";
 
 export const Navbar = (): JSX.Element => {
   const router = useRouter();
@@ -28,7 +29,7 @@ export const Navbar = (): JSX.Element => {
         {links.map(({ name, href }) => (
           <Link key={href} href={href}>
             <a
-              className={`${router.pathname == href ? "border-b-2" : ""
+              className={`${isActiveLink(href, router.pathname) ? "border-b-2" : ""
                 } flex flex-col mx-2 sm:mx-4 relative`}
             >
               {name}
