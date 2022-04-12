@@ -16,3 +16,20 @@
     @apply text-base;
   }
 }
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #282c34;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #3b3d42;
+  border-radius: 10px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #e8e8e8;
+}
