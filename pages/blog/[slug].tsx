@@ -20,7 +20,7 @@ interface IProps {
 
 const BlogPost: NextPage<IProps> = ({ post }) => {
   return (
-    <Layout title={post.title}>
+    <Layout title={post?.title || "Blog"}>
       <div>
         {post && (
           <div key={post.slug} className="flex flex-col max-w-3xl mx-auto p-6">
@@ -98,7 +98,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { slug } = context.params as IParams;
-  const post = await prisma.blog.findUnique({
+  const post: IPost = await prisma.blog.findUnique({
     where: {
       slug: slug,
     },
