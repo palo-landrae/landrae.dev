@@ -6,6 +6,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { default as oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 import moment from "moment";
 import Image from "next/image";
@@ -72,8 +73,11 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
               </LikeButton>
             </div>
           </div>
-          <div className="">
-            <ReactMarkdown components={{ code: CodeBlock, a: markdownLink }}>
+          <div className="markdown">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{ code: CodeBlock, a: MarkdownLink, td: TableCell }}
+            >
               {post.content}
             </ReactMarkdown>
           </div>
@@ -85,12 +89,21 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
 
 export default BlogPost;
 
-const markdownLink = ({ children, href }) => {
+const TableCell = ({ node, children, ...props }) => {
+  return (
+    <td className="px-3" {...props}>
+      {children}
+    </td>
+  );
+};
+
+const MarkdownLink = ({ node, children, href, ...props }) => {
   return (
     <a
       href={href}
       target="_blank"
-      className="underline underline-offset-2 text-sky-300"
+      className="underline underline-offset-2 text-sky-400"
+      {...props}
     >
       {children}
     </a>
@@ -103,7 +116,7 @@ const CodeBlock = ({ node, inline, className, children, ...props }) => {
       language={match[1]}
       style={oneDark}
       PreTag="div"
-      className="codeStyle"
+      className="scrollbar"
       {...props}
     >
       {children}
