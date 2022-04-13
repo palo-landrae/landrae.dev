@@ -32,6 +32,7 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
               src={post.img}
               layout="fill"
               objectFit="cover"
+              quality={60}
             />
           </div>
           <div className="inline-flex justify-between items-center py-3">
@@ -43,6 +44,7 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
                   src="/images/profile.jpg"
                   layout="fill"
                   objectFit="cover"
+                  quality={20}
                 />
               </div>
               <div className="flex flex-col">

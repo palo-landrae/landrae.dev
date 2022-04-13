@@ -44,7 +44,6 @@ const Home: NextPage = () => {
               src="/images/profile.jpg"
               layout="fill"
               objectFit="cover"
-              quality={20}
             />
           </div>
         </div>

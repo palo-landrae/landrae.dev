@@ -42,6 +42,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
                       src={post.img}
                       layout="fill"
                       objectFit="cover"
+                      quality={40}
                     />
                   </div>
                 </div>
@@ -65,6 +66,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
       date: true,
       slug: true,
     },
+    orderBy: [
+      {
+        date: "desc",
+      },
+    ],
   });
   return {
     props: {
