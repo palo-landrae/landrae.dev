@@ -22,69 +22,80 @@ interface IProps {
 
 const BlogPost: NextPage<IProps> = ({ post }) => {
   return (
-    <Layout title={post?.title || "Blog"}>
-      <div>
-        {post && (
-          <div key={post.slug} className="flex flex-col max-w-3xl mx-auto p-6">
-            <div className="w-full h-48 relative min-w-sm">
-              <Image
-                alt="Blog post image"
-                src={post.img}
-                layout="fill"
-                objectFit="cover"
-              />
-            </div>
-            <div className="inline-flex justify-between items-center py-3">
-              <div className="inline-flex items-center space-x-2">
-                <div className="w-12 h-12 relative">
-                  <Image
-                    className="rounded-full"
-                    alt="Blog post image"
-                    src="/images/profile.jpg"
-                    layout="fill"
-                    objectFit="cover"
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <strong className="text-lg">palo-landrae</strong>
-                  <span className="text-sm">
-                    Posted on {moment(post.date).format("LL")}
-                  </span>
-                </div>
+    <Layout title={post?.title || "Blog"} description={post?.description}>
+      {post && (
+        <div key={post.slug} className="flex flex-col p-6">
+          <div className="w-full h-48 relative min-w-sm">
+            <Image
+              alt="Blog post image"
+              src={post.img}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+          <div className="inline-flex justify-between items-center py-3">
+            <div className="inline-flex items-center space-x-2">
+              <div className="w-12 h-12 relative">
+                <Image
+                  className="rounded-full"
+                  alt="Blog post image"
+                  src="/images/profile.jpg"
+                  layout="fill"
+                  objectFit="cover"
+                />
               </div>
-              <div className="inline-flex mx-2 items-center">
-                <LikeButton id={post.slug} namespace="blog">
-                  {({ handlePress, totalLikes, userLiked, isLoading }) => (
-                    <button
-                      onClick={handlePress}
-                      disabled={isLoading}
-                      className="inline-flex items-center space-x-2"
-                    >
-                      <div className="w-7 h-7 self-center">
-                        {userLiked ? (
-                          <TwitterHeartIcon />
-                        ) : (
-                          <TwitterHeartEmptyIcon />
-                        )}
-                      </div>
-                      <span className="text-lg">{totalLikes}</span>
-                    </button>
-                  )}
-                </LikeButton>
+              <div className="flex flex-col">
+                <strong className="text-lg">palo-landrae</strong>
+                <span className="text-sm">
+                  Posted on {moment(post.date).format("LL")}
+                </span>
               </div>
             </div>
-            <ReactMarkdown components={{ code: CodeBlock }}>
+            <div className="inline-flex mx-2 items-center">
+              <LikeButton id={post.slug} namespace="blog">
+                {({ handlePress, totalLikes, userLiked, isLoading }) => (
+                  <button
+                    onClick={handlePress}
+                    disabled={isLoading}
+                    className="inline-flex items-center space-x-2"
+                  >
+                    <div className="w-7 h-7 self-center">
+                      {userLiked ? (
+                        <TwitterHeartIcon />
+                      ) : (
+                        <TwitterHeartEmptyIcon />
+                      )}
+                    </div>
+                    <span className="text-lg">{totalLikes}</span>
+                  </button>
+                )}
+              </LikeButton>
+            </div>
+          </div>
+          <div className="">
+            <ReactMarkdown components={{ code: CodeBlock, a: markdownLink }}>
               {post.content}
             </ReactMarkdown>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </Layout>
   );
 };
 
 export default BlogPost;
 
+const markdownLink = ({ children, href }) => {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      className="underline underline-offset-2 text-sky-300"
+    >
+      {children}
+    </a>
+  );
+};
 const CodeBlock = ({ node, inline, className, children, ...props }) => {
   const match = /language-(\w+)/.exec(className || "");
   return !inline && match ? (

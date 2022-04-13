@@ -14,7 +14,7 @@ export interface Props {
 
 const Blog: NextPage<Props> = ({ posts }) => {
   return (
-    <Layout title="Blog">
+    <Layout title="Blog" description="Landrae.dev Blog Page">
       <div className="flex flex-col max-w-3xl w-full mx-auto">
         {posts &&
           posts.map((post) => {

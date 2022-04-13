@@ -15,6 +15,21 @@
   h4 {
     @apply text-base;
   }
+  ul {
+    @apply py-2;
+  }
+  li {
+    @apply list-disc;
+    @apply ml-8;
+  }
+  blockquote {
+    @apply border-l-2;
+    @apply border-zinc-200;
+    @apply block;
+    @apply px-4;
+    @apply my-2;
+    @apply mx-8;
+  }
 }
 
 .scrollbar::-webkit-scrollbar {

@@ -20,6 +20,22 @@ export const IconButton: React.FC<IconProps> = ({ children, href }) => {
   );
 };
 
+export const Socials = () => {
+  return (
+    <div className="flex space-x-3 mx-auto">
+      <IconButton href="https://github.com/palo-landrae">
+        <Github />
+      </IconButton>
+      <IconButton href="https://www.youtube.com/c/Landrae">
+        <YoutubeIcon />
+      </IconButton>
+      <IconButton href="https://www.instagram.com/landrae_dev/">
+        <InstagramIcon />
+      </IconButton>
+    </div>
+  );
+};
+
 export const Github = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" href="/">
