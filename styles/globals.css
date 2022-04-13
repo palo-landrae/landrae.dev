@@ -15,34 +15,16 @@
   h4 {
     @apply text-base;
   }
-  ul {
-    @apply py-1;
-  }
-  li {
-    @apply list-disc;
-    @apply ml-8;
-  }
-  blockquote {
-    @apply border-l-2;
-    @apply border-zinc-200;
-    @apply block;
-    @apply px-4;
-    @apply my-2;
-    @apply mx-8;
-  }
-  a {
-    @apply cursor-pointer;
-  }
 }
 
-.markdown h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  padding-top: 6px;
-  padding-bottom: 4px;
+.padding-7 {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+}
+
+.code-modified::before,
+.code-modified::after {
+  content: "" !important;
 }
 
 .scrollbar::-webkit-scrollbar {

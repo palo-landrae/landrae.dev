@@ -75,11 +75,12 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
               </LikeButton>
             </div>
           </div>
-          <div className="markdown">
+          <div className="prose max-w-3xl">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
                 code: CodeBlock,
+                pre: PreBlock,
                 a: MarkdownLink,
                 table: Table,
               }}
@@ -118,6 +119,15 @@ const MarkdownLink = ({ node, children, href, ...props }) => {
     </a>
   );
 };
+
+const PreBlock = ({ node, children, ...props }) => {
+  return (
+    <pre className="" {...props}>
+      {children}
+    </pre>
+  );
+};
+
 const CodeBlock = ({ node, inline, className, children, ...props }) => {
   const match = /language-(\w+)/.exec(className || "");
   return !inline && match ? (
@@ -125,13 +135,15 @@ const CodeBlock = ({ node, inline, className, children, ...props }) => {
       language={match[1]}
       style={oneDark}
       PreTag="div"
-      className="scrollbar"
+      className="padding-7 scrollbar"
       {...props}
     >
       {children}
     </SyntaxHighlighter>
   ) : (
-    <code {...props}>{children}</code>
+    <code className="bg-oneDark px-2 py-1 rounded-md code-modified" {...props}>
+      {children}
+    </code>
   );
 };
 
