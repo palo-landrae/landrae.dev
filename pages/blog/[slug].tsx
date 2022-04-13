@@ -78,7 +78,11 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
           <div className="markdown">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
-              components={{ code: CodeBlock, a: MarkdownLink, td: TableCell }}
+              components={{
+                code: CodeBlock,
+                a: MarkdownLink,
+                table: Table,
+              }}
             >
               {post.content}
             </ReactMarkdown>
@@ -91,11 +95,13 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
 
 export default BlogPost;
 
-const TableCell = ({ node, children, ...props }) => {
+const Table = ({ node, children, ...props }) => {
   return (
-    <td className="px-3" {...props}>
-      {children}
-    </td>
+    <div className="flex overflow-auto">
+      <table className="scrollbar" {...props}>
+        {children}
+      </table>
+    </div>
   );
 };
 
