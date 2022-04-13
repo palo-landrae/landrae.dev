@@ -102,6 +102,7 @@ const MarkdownLink = ({ node, children, href, ...props }) => {
     <a
       href={href}
       target="_blank"
+      rel="noreferrer"
       className="underline underline-offset-2 text-sky-400"
       {...props}
     >
