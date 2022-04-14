@@ -11,6 +11,7 @@ module.exports = {
       },
       colors: {
         oneDark: "#282c34",
+        darkSkyBlue: "#74B3CE",
       },
       typography: ({ theme }) => ({
         DEFAULT: {
@@ -23,7 +24,7 @@ module.exports = {
             "--tw-prose-counters": theme("colors.stone[600]"),
             "--tw-prose-bullets": theme("colors.stone[100]"),
             "--tw-prose-hr": theme("colors.stone[300]"),
-            "--tw-prose-quotes": theme("colors.stone[300]"),
+            "--tw-prose-quotes": theme("colors.gray[300]"),
             "--tw-prose-quote-borders": theme("colors.stone[300]"),
             "--tw-prose-captions": theme("colors.stone[700]"),
             "--tw-prose-code": theme("colors.stone[200]"),
