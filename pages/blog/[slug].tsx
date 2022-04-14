@@ -29,12 +29,15 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
           <div className="w-full h-48 relative min-w-sm">
             <Image
               alt="Blog post image"
-              src={post.img}
+              src={post.img_url}
               layout="fill"
               objectFit="cover"
               quality={60}
             />
           </div>
+          <span className="self-center text-sm py-1 text-gray-400">
+            Photo by {post.img_author} on {post.img_src}
+          </span>
           <div className="inline-flex justify-between items-center py-3">
             <div className="inline-flex items-center space-x-2">
               <div className="w-12 h-12 relative">
@@ -174,7 +177,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
       id: true,
       title: true,
       description: true,
-      img: true,
+      img_src: true,
+      img_url: true,
+      img_author: true,
       date: true,
       content: true,
       slug: true,

@@ -39,7 +39,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
                   <div className="w-full h-48 relative min-w-sm">
                     <Image
                       alt="Blog post image"
-                      src={post.img}
+                      src={post.img_url}
                       layout="fill"
                       objectFit="cover"
                       quality={40}
@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       id: true,
       title: true,
       description: true,
-      img: true,
+      img_url: true,
       date: true,
       slug: true,
     },
