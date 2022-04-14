@@ -32,7 +32,6 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
               src={post.img_url}
               layout="fill"
               objectFit="cover"
-              quality={60}
             />
           </div>
           <span className="self-center text-sm py-1 text-gray-400">

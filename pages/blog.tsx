@@ -42,7 +42,6 @@ const Blog: NextPage<Props> = ({ posts }) => {
                       src={post.img_url}
                       layout="fill"
                       objectFit="cover"
-                      quality={40}
                     />
                   </div>
                 </div>
