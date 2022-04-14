@@ -1,8 +1,12 @@
 import type { NextPage } from "next";
 import { Layout } from "@/components/layout";
 import Image from "next/image";
-import { Socials } from "@/components/icons";
+import dynamic from "next/dynamic";
 import { BioYear, BioSection } from "@/components/bio";
+
+const Socials = dynamic(() =>
+  import("@/components/icons").then((mod) => mod.Socials)
+);
 
 const Home: NextPage = () => {
   return (
