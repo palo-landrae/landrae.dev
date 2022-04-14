@@ -14,7 +14,7 @@ model blog {
   description String
   file_name   String
   img_url     String
-  img_src     String
+  img_provider  String
   img_author  String
   slug        String @unique
   title       String
