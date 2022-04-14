@@ -42,9 +42,8 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
                   className="rounded-full"
                   alt="Blog post image"
                   src="/images/profile.jpg"
-                  layout="fill"
-                  objectFit="cover"
-                  quality={20}
+                  width={128}
+                  height={128}
                 />
               </div>
               <div className="flex flex-col">

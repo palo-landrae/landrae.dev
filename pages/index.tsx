@@ -42,8 +42,8 @@ const Home: NextPage = () => {
             <Image
               alt="Blog post image"
               src="/images/profile.jpg"
-              layout="fill"
-              objectFit="cover"
+              width={256}
+              height={256}
             />
           </div>
         </div>
