@@ -42,7 +42,7 @@ const Home: NextPage = () => {
               learned so far.
             </p>
           </div>
-          <div className="w-40 h-40 rounded-md overflow-hidden relative mx-auto md:mx-0 mt-4 md:my-auto">
+          <div className="w-40 h-40 rounded-sm border-2 border-current self-center overflow-hidden relative mx-auto md:mx-0 mt-5 md:mt-0">
             <Image
               alt="Blog post image"
               src="/images/profile.jpg"
