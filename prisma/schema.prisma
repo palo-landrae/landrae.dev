@@ -13,7 +13,8 @@ model blog {
   date        DateTime @db.Date
   description String
   file_name   String
-  img_url     String
+  img_header_url  String
+  img_thumbnail_url String
   img_provider  String
   img_author  String
   slug        String @unique

@@ -12,6 +12,14 @@ export interface Props {
   posts: IPost[];
 }
 
+const urlBuilder = ({ id, width }) => {
+  return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},q_75,f_auto,c_scale/${id}`;
+};
+
+const urlBlurBluider = ({ id, width }) => {
+  return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},e_blur,q_1,f_auto,c_scale/${id}`;
+};
+
 const Blog: NextPage<Props> = ({ posts }) => {
   return (
     <Layout title="Blog" description="Landrae.dev Blog Page">
@@ -21,7 +29,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
             return (
               <div className="p-6 w-full" key={post.slug}>
                 <div className="flex flex-col-reverse md:flex-row justify-items-center md:justify-around items-start mx-auto">
-                  <div className="py-2 md:py-0 pr-3 w-full">
+                  <div className="py-2 md:py-0 md:pr-3 w-full max-w-300 md:max-w-none mx-auto">
                     <span className="text-sm mr-4">
                       Posted on {moment(post.date).format("LL")}
                     </span>
@@ -36,12 +44,21 @@ const Blog: NextPage<Props> = ({ posts }) => {
                       <a className="underline underline-offset-4">Read More</a>
                     </Link>
                   </div>
-                  <div className="w-full h-48 relative min-w-sm">
+                  <div className="flex justify-center md:justify-end w-full relative">
                     <Image
                       alt="Blog post image"
-                      src={post.img_url}
-                      layout="fill"
-                      objectFit="cover"
+                      src={urlBuilder({
+                        id: post.img_thumbnail_url,
+                        width: 300,
+                      })}
+                      placeholder="blur"
+                      blurDataURL={urlBlurBluider({
+                        id: post.img_thumbnail_url,
+                        width: 300,
+                      })}
+                      unoptimized={true}
+                      width={300}
+                      height={200}
                     />
                   </div>
                 </div>
@@ -55,13 +72,13 @@ const Blog: NextPage<Props> = ({ posts }) => {
 
 export default Blog;
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
   const posts: IPost[] = await prisma.blog.findMany({
     select: {
       id: true,
       title: true,
       description: true,
-      img_url: true,
+      img_thumbnail_url: true,
       date: true,
       slug: true,
     },

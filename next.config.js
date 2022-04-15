@@ -6,8 +6,8 @@ const nextConfig = {
 module.exports = {
   nextConfig,
   images: {
-    formats: ["image/avif", "image/webp"],
-    domains: ["images.unsplash.com"],
+    formats: ["image/avif", "image/webp", "image/jpeg"],
+    domains: ["images.unsplash.com", "res.cloudinary.com"],
   },
   pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
 };

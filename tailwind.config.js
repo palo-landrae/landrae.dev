@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        300: "300px",
+      },
       fontFamily: {
         mplusrounded: ["'M Plus Rounded 1c'"],
         kodchasan: ["'Kodchasan'"],

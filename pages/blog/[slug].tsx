@@ -21,17 +21,31 @@ interface IProps {
   post: IPost;
 }
 
+const urlBuilder = ({ id, width }) => {
+  return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},q_75,f_auto,c_scale/${id}`;
+};
+
+const urlBlurBluider = ({ id, width }) => {
+  return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},e_blur,q_1,f_auto,c_scale/${id}`;
+};
+
 const BlogPost: NextPage<IProps> = ({ post }) => {
   return (
     <Layout title={post?.title || "Blog"} description={post?.description}>
       {post && (
         <div key={post.slug} className="flex flex-col p-6">
-          <div className="w-full h-48 relative min-w-sm">
+          <div className="w-full relative min-w-sm">
             <Image
               alt="Blog post image"
-              src={post.img_url}
-              layout="fill"
-              objectFit="cover"
+              src={urlBuilder({ id: post.img_header_url, width: 720 })}
+              width={720}
+              height={192}
+              placeholder="blur"
+              blurDataURL={urlBlurBluider({
+                id: post.img_header_url,
+                width: 720,
+              })}
+              unoptimized={true}
             />
           </div>
           <span className="self-center text-sm py-1 text-gray-400">
@@ -166,8 +180,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-  const { slug } = context.params as IParams;
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const { slug } = ctx.params as IParams;
   const post: IPost = await prisma.blog.findUnique({
     where: {
       slug: slug,
@@ -177,7 +191,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       title: true,
       description: true,
       img_provider: true,
-      img_url: true,
+      img_header_url: true,
       img_author: true,
       date: true,
       content: true,
