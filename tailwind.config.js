@@ -5,6 +5,12 @@ module.exports = {
   ],
   theme: {
     extend: {
+      width: {
+        300: "300px",
+      },
+      height: {
+        200: "200px",
+      },
       maxWidth: {
         300: "300px",
       },

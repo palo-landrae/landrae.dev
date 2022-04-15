@@ -44,22 +44,24 @@ const Blog: NextPage<Props> = ({ posts }) => {
                       <a className="underline underline-offset-4">Read More</a>
                     </Link>
                   </div>
-                  <div className="flex justify-center md:justify-end w-full relative">
-                    <Image
-                      alt="Blog post image"
-                      src={urlBuilder({
-                        id: post.img_thumbnail_url,
-                        width: 300,
-                      })}
-                      placeholder="blur"
-                      blurDataURL={urlBlurBluider({
-                        id: post.img_thumbnail_url,
-                        width: 300,
-                      })}
-                      unoptimized={true}
-                      width={300}
-                      height={200}
-                    />
+                  <div className="flex justify-center md:justify-end w-full">
+                    <div className="w-300 h-200 relative">
+                      <Image
+                        alt="Blog post image"
+                        src={urlBuilder({
+                          id: post.img_thumbnail_url,
+                          width: 750,
+                        })}
+                        placeholder="blur"
+                        blurDataURL={urlBlurBluider({
+                          id: post.img_thumbnail_url,
+                          width: 300,
+                        })}
+                        unoptimized={true}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
