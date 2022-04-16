@@ -7,6 +7,7 @@ import { ParsedUrlQuery } from "querystring";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { default as oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 import moment from "moment";
 import Image from "next/image";
@@ -93,6 +94,7 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
           <div className="prose max-w-3xl">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
               components={{
                 code: CodeBlock,
                 pre: PreBlock,
