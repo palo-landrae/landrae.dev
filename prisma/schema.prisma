@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -8,17 +8,24 @@ datasource db {
 }
 
 model blog {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  content     String
-  date        DateTime @db.Date
-  description String
-  file_name   String
-  img_header_url  String
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  content           String
+  date              DateTime @db.Date
+  description       String
+  file_name         String
+  img_author        String
+  img_header_url    String
+  img_provider      String
   img_thumbnail_url String
-  img_provider  String
-  img_author  String
-  slug        String @unique
-  title       String
+  likes             String[]
+  slug              String @unique
+  title             String
+}
+
+model likes {
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug  String @unique
+  likes String[]
 }
 
 model projects {

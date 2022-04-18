@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { IPost } from "@/models/blog-post";
+import { IPost } from "@/interfaces/blog-post";
 import { prisma } from "@/lib/prisma";
 import { Layout } from "@/components/layout";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -11,8 +11,7 @@ import rehypeRaw from "rehype-raw";
 import { default as oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 import moment from "moment";
 import Image from "next/image";
-import { TwitterHeartIcon, TwitterHeartEmptyIcon } from "@/components/icons";
-import { LikeButton } from "@lyket/react";
+import { MyLikeButton } from "@/components/like-button";
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -71,24 +70,7 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
               </div>
             </div>
             <div className="inline-flex mx-2 items-center">
-              <LikeButton id={post.slug} namespace="blog">
-                {({ handlePress, totalLikes, userLiked, isLoading }) => (
-                  <button
-                    onClick={handlePress}
-                    disabled={isLoading}
-                    className="inline-flex items-center space-x-2"
-                  >
-                    <div className="w-7 h-7 self-center">
-                      {userLiked ? (
-                        <TwitterHeartIcon />
-                      ) : (
-                        <TwitterHeartEmptyIcon />
-                      )}
-                    </div>
-                    <span className="text-lg">{totalLikes}</span>
-                  </button>
-                )}
-              </LikeButton>
+              <MyLikeButton slug={post.slug} />
             </div>
           </div>
           <div className="prose max-w-3xl">
@@ -198,6 +180,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       date: true,
       content: true,
       slug: true,
+      likes: true,
     },
   });
   return {

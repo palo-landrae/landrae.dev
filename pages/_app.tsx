@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Provider as Lyket } from "@lyket/react";
 import { AnimatePresence } from "framer-motion";
+import { SessionProvider } from "@/components/session";
 
 declare const window: any;
 
@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
   const url = `https://landrae.dev${router.route}`;
 
   return (
-    <Lyket apiKey="pt_092639025d902fdad5bc16fbd39d16">
+    <SessionProvider>
       <AnimatePresence
         exitBeforeEnter
         initial={false}
@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       >
         <Component {...pageProps} key={url} />
       </AnimatePresence>
-    </Lyket>
+    </SessionProvider>
   );
 }
 
