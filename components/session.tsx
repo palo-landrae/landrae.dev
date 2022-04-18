@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import UseStorage from "@/hooks/UseStorage";
+import { UseStorageHook } from "@/hooks/UseStorageHook";
 import { generateRandomString } from "@/hooks/generate-random-string";
 
 interface SessionContextProps {
@@ -13,7 +13,7 @@ interface IProps {
 export const SessionContext = createContext<SessionContextProps | null>(null);
 
 export const SessionProvider: React.FC<IProps> = ({ children }) => {
-  const { getItem } = UseStorage();
+  const { getItem } = UseStorageHook();
 
   const getSessionID = () => {
     const storedId = getItem("like-session-id", "local");
@@ -27,7 +27,7 @@ export const SessionProvider: React.FC<IProps> = ({ children }) => {
   const [likeSessionId, setLikeSessionId] = useState(getSessionID());
 
   useEffect(() => {
-    const { setItem } = UseStorage();
+    const { setItem } = UseStorageHook();
     setItem("like-session-id", likeSessionId, "local");
   }, [likeSessionId]);
 
