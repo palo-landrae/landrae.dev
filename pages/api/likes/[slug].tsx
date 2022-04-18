@@ -22,7 +22,6 @@ export default async function handle(req, res) {
         likes: true,
       },
     });
-    console.log(data);
     res.json(JSON.parse(JSON.stringify(data)));
   }
 }
