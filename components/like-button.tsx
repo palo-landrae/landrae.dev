@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { SessionContext } from "@/components/session";
 import useSWR from "swr";
 import ILike from "@/interfaces/ILike";
@@ -25,7 +25,7 @@ export const MyLikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
     refreshInterval: 5000,
   });
 
-  useEffect(() => {
+  const fetchLikes = useCallback(() => {
     if (data) {
       const doc = data.find((doc: ILike) => {
         return doc.slug === slug;
@@ -34,7 +34,11 @@ export const MyLikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
       setUserLiked(doc.likes.includes(likeSessionId));
       setTotalLikes(doc.likes.length);
     }
-  }, [data]);
+  }, [data, slug, likeSessionId]);
+
+  useEffect(() => {
+    fetchLikes();
+  }, [fetchLikes]);
 
   const postData = (slug: string, likes: string[]) => {
     setIsLoading(true);

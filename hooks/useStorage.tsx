@@ -5,7 +5,7 @@ type UseStorageReturnValue = {
   removeItem: (key: string, type?: StorageType) => void;
 };
 
-const useStorage = (): UseStorageReturnValue => {
+const UseStorage = (): UseStorageReturnValue => {
   const storageType = (type?: StorageType): "localStorage" | "sessionStorage" =>
     `${type ?? "session"}Storage`;
 
@@ -35,4 +35,4 @@ const useStorage = (): UseStorageReturnValue => {
   };
 };
 
-export default useStorage;
+export default UseStorage;
