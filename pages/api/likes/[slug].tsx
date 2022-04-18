@@ -1,10 +1,11 @@
 import { prisma } from "@/lib/prisma";
 
 export default async function handle(req, res) {
+  const { slug } = req.query;
   if (req.method == "POST") {
     const data = await prisma.likes.update({
       where: {
-        slug: req.body.slug,
+        slug: slug,
       },
       data: {
         likes: req.body.likes,
@@ -12,12 +13,16 @@ export default async function handle(req, res) {
     });
     res.json(data);
   } else {
-    const data = await prisma.likes.findMany({
+    const data = await prisma.likes.findUnique({
+      where: {
+        slug: slug,
+      },
       select: {
         slug: true,
         likes: true,
       },
     });
+    console.log(data);
     res.json(JSON.parse(JSON.stringify(data)));
   }
 }

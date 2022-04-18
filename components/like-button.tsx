@@ -20,21 +20,18 @@ export const MyLikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
   const fetcher = async (url: string) =>
     await fetch(url).then((res) => res.json());
 
-  const { data } = useSWR("/api/likes", fetcher, {
+  const { data } = useSWR(`/api/likes/${slug}`, fetcher, {
     revalidateOnFocus: false,
     refreshInterval: 5000,
   });
 
   const fetchLikes = useCallback(() => {
     if (data) {
-      const doc = data.find((doc: ILike) => {
-        return doc.slug === slug;
-      });
-      setLikes(doc.likes);
-      setUserLiked(doc.likes.includes(likeSessionId));
-      setTotalLikes(doc.likes.length);
+      setLikes(data.likes);
+      setUserLiked(data.likes.includes(likeSessionId));
+      setTotalLikes(data.likes.length);
     }
-  }, [data, slug, likeSessionId]);
+  }, [data, likeSessionId]);
 
   useEffect(() => {
     fetchLikes();
@@ -42,9 +39,8 @@ export const MyLikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
 
   const postData = (slug: string, likes: string[]) => {
     setIsLoading(true);
-    fetch("/api/likes", {
+    fetch(`/api/likes/${slug}`, {
       body: JSON.stringify({
-        slug: slug,
         likes: likes,
       }),
       method: "POST",
