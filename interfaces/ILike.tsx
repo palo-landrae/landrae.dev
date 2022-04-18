@@ -1,5 +1,5 @@
 export default interface ILike {
-  _id?: string;
+  id?: string;
   slug: string;
   likes: string[];
 }

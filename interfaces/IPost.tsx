@@ -9,5 +9,5 @@ export interface IPost {
   date: Date;
   slug: string;
   content?: string;
-  likes: string[];
+  likes?: string[];
 }

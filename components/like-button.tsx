@@ -9,7 +9,7 @@ export interface LikeButtonProps {
   text?: boolean;
 }
 
-export const MyLikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
+export const LikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
   const { likeSessionId } = useContext(SessionContext);
 
   const [userLiked, setUserLiked] = useState(false);
@@ -20,7 +20,7 @@ export const MyLikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
   const fetcher = async (url: string) =>
     await fetch(url).then((res) => res.json());
 
-  const { data } = useSWR(`/api/likes/${slug}`, fetcher, {
+  const { data } = useSWR<ILike>(`/api/likes/${slug}`, fetcher, {
     revalidateOnFocus: false,
     refreshInterval: 5000,
   });
@@ -48,8 +48,7 @@ export const MyLikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      setIsLoading(false);
-      res.json();
+      if (res.status == 200) setIsLoading(false);
     });
   };
 

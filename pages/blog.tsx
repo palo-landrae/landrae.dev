@@ -3,10 +3,10 @@ import Image from "next/image";
 import { GetStaticProps } from "next";
 import { prisma } from "@/lib/prisma";
 import { Layout } from "@/components/layout";
-import { IPost } from "@/interfaces/blog-post";
+import { IPost } from "@/interfaces/IPost";
 import moment from "moment";
 import Link from "next/link";
-import { MyLikeButton } from "@/components/like-button";
+import { LikeButton } from "@/components/like-button";
 
 export interface Props {
   posts: IPost[];
@@ -25,7 +25,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
     <Layout title="Blog" description="Landrae.dev Blog Page">
       <div className="flex flex-col max-w-3xl w-full mx-auto">
         {posts &&
-          posts.map((post, index) => {
+          posts.map((post) => {
             return (
               <div className="p-6 w-full" key={post.slug}>
                 <div className="flex flex-col-reverse md:flex-row justify-items-center md:justify-around items-start mx-auto">
@@ -33,7 +33,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
                     <span className="text-sm mr-4">
                       Posted on {moment(post.date).format("LL")}
                     </span>
-                    <MyLikeButton slug={post.slug} text={true} />
+                    <LikeButton slug={post.slug} text={true} />
                     <h1 className="text-xl">{post.title}</h1>
                     <p className="mb-4 line-clamp-3">{post.description}</p>
                     <Link href={`/blog/${post.slug}`}>
@@ -79,7 +79,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       img_thumbnail_url: true,
       date: true,
       slug: true,
-      likes: true,
     },
     orderBy: [
       {

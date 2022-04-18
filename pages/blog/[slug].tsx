@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { IPost } from "@/interfaces/blog-post";
+import { IPost } from "@/interfaces/IPost";
 import { prisma } from "@/lib/prisma";
 import { Layout } from "@/components/layout";
 import { GetStaticPaths, GetStaticProps } from "next";
@@ -11,7 +11,7 @@ import rehypeRaw from "rehype-raw";
 import { default as oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 import moment from "moment";
 import Image from "next/image";
-import { MyLikeButton } from "@/components/like-button";
+import { LikeButton } from "@/components/like-button";
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -32,7 +32,7 @@ const urlBlurBluider = ({ id, width }) => {
 const BlogPost: NextPage<IProps> = ({ post }) => {
   return (
     <Layout title={post?.title || "Blog"} description={post?.description}>
-      {post && (
+      {post ? (
         <div key={post.slug} className="flex flex-col p-6">
           <div className="w-full relative min-w-sm">
             <Image
@@ -70,7 +70,7 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
               </div>
             </div>
             <div className="inline-flex mx-2 items-center">
-              <MyLikeButton slug={post.slug} />
+              <LikeButton slug={post.slug} />
             </div>
           </div>
           <div className="prose max-w-3xl">
@@ -88,6 +88,8 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
             </ReactMarkdown>
           </div>
         </div>
+      ) : (
+        <p>Loading...</p>
       )}
     </Layout>
   );

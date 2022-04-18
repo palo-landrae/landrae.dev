@@ -22,12 +22,6 @@ model blog {
   title             String
 }
 
-model likes {
-  id    String   @id @default(auto()) @map("_id") @db.ObjectId
-  slug  String @unique
-  likes String[]
-}
-
 model projects {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
   color       String

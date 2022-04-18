@@ -1,9 +1,10 @@
+import ILike from "@/interfaces/ILike";
 import { prisma } from "@/lib/prisma";
 
 export default async function handle(req, res) {
   const { slug } = req.query;
   if (req.method == "POST") {
-    const data = await prisma.likes.update({
+    await prisma.blog.update({
       where: {
         slug: slug,
       },
@@ -11,9 +12,9 @@ export default async function handle(req, res) {
         likes: req.body.likes,
       },
     });
-    res.json(data);
+    res.status(200).json({ success: true });
   } else {
-    const data = await prisma.likes.findUnique({
+    const data: ILike = await prisma.blog.findUnique({
       where: {
         slug: slug,
       },
