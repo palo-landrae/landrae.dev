@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { AnimatePresence } from "framer-motion";
 import { SessionProvider } from "@/components/session";
+import { ThemeProvider } from "next-themes";
 
 declare const window: any;
 
@@ -15,7 +16,9 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         initial={false}
         onExitComplete={() => window.scrollTo(0, 0)}
       >
-        <Component {...pageProps} key={url} />
+        <ThemeProvider attribute="class">
+          <Component {...pageProps} key={url} />
+        </ThemeProvider>
       </AnimatePresence>
     </SessionProvider>
   );

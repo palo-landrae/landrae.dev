@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Spacer } from "./spacer";
 import { useRouter } from "next/router";
 import { isActiveLink } from "@/lib/utils";
+import ThemeButton from "../theme-button";
 
 export const Navbar = (): JSX.Element => {
   const router = useRouter();
@@ -36,6 +37,7 @@ export const Navbar = (): JSX.Element => {
             </a>
           </Link>
         ))}
+        <ThemeButton />
       </div>
     </nav>
   );
