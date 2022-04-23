@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { Spacer } from "./spacer";
+import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { isActiveLink } from "@/lib/utils";
 import ThemeButton from "../theme-button";
+import { Spacer } from "./spacer";
 
 export const Navbar = (): JSX.Element => {
   const router = useRouter();
@@ -22,20 +22,22 @@ export const Navbar = (): JSX.Element => {
   ];
   return (
     <nav>
-      <div className="flex max-w-3xl mx-auto py-4 px-6 font-mplusrounded font-normal">
-        <Link href="/">
-          <a className="text-lg">Landrae</a>
-        </Link>
+      <div className="flex max-w-3xl mx-auto p-6 font-mplusrounded">
+        <NextLink href="/">
+          <a className="py-2 inline-block">Landrae</a>
+        </NextLink>
         <Spacer />
         {links.map(({ name, href }) => (
-          <Link key={href} href={href}>
+          <NextLink key={href} href={href}>
             <a
-              className={`${isActiveLink(href, router.pathname) ? "border-b-2" : ""
-                } flex flex-col mx-2 sm:mx-4 relative`}
+              className={`${isActiveLink(href, router.pathname)
+                  ? "font-semibold"
+                  : "font-normal"
+                } flex flex-col mr-1 md:mr-2 md:mx-3 inline-block p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all`}
             >
               {name}
             </a>
-          </Link>
+          </NextLink>
         ))}
         <ThemeButton />
       </div>
