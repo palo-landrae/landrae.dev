@@ -31,9 +31,9 @@ const Home: NextPage = () => {
 
       {/* About-start */}
       <div className="px-6 my-3">
+        <h1 className="text-3xl">About</h1>
         <div className="flex flex-col md:flex-row align-center justify-center md:justify-between">
           <div className="max-w-md">
-            <h1 className="text-3xl">About</h1>
             <p className="text-base md:text-lg">
               My name is Loui Andrae Palo. I&#39;m a Senior High School student
               currently learning about Information Technology/Computer Science.
@@ -42,12 +42,12 @@ const Home: NextPage = () => {
               learned so far.
             </p>
           </div>
-          <div className="w-40 h-40 rounded-sm self-center overflow-hidden relative mx-auto md:mx-0 mt-5 md:mt-0">
+          <div className="w-32 h-32 rounded-md self-center overflow-hidden relative mx-auto md:mx-0 mt-5 md:mt-0">
             <Image
               alt="Blog post image"
               src="/images/profile.jpg"
-              width={160}
-              height={160}
+              width={128}
+              height={128}
             />
           </div>
         </div>
