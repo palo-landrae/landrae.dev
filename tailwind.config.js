@@ -24,15 +24,6 @@ module.exports = {
         darkSkyBlue: "#74B3CE",
       },
       typography: ({ theme }) => ({
-        base: {
-          css: [
-            {
-              pre: {
-                padding: "0px",
-              },
-            },
-          ],
-        },
         dark: {
           css: {
             "--tw-prose-body": theme("colors.stone[100]"),

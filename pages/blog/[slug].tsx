@@ -73,7 +73,7 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
               <LikeButton slug={post.slug} />
             </div>
           </div>
-          <div className="prose prose-zinc dark:prose-dark max-w-3xl">
+          <div className="prose prose-zinc dark:prose-dark prose-pre:p-0 prose-pre:bg-oneDark max-w-3xl">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
