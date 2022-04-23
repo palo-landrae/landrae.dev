@@ -53,7 +53,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
           return (
             <div className="w-full" key={post.slug}>
               <div className="flex flex-col-reverse md:flex-row justify-items-center md:justify-around items-start mx-auto">
-                <div className="py-2 md:py-0 md:pr-3 w-full max-w-300 md:max-w-none mx-auto">
+                <div className="py-2 md:py-0 md:pr-3 w-full max-w-sm md:max-w-none mx-auto">
                   <span className="text-sm mr-4">
                     Posted on {moment(post.date).format("LL")}
                   </span>
@@ -65,7 +65,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
                   </Link>
                 </div>
                 <div className="flex justify-center md:justify-end w-full">
-                  <div className="w-300 h-200 relative">
+                  <div className="mx-auto w-full max-w-sm md:max-w-300 block">
                     <Image
                       alt="Blog post image"
                       src={urlBuilder({
@@ -78,8 +78,9 @@ const Blog: NextPage<Props> = ({ posts }) => {
                         width: 300,
                       })}
                       unoptimized={true}
-                      layout="fill"
-                      objectFit="cover"
+                      layout="responsive"
+                      width={300}
+                      height={200}
                     />
                   </div>
                 </div>
