@@ -17,6 +17,39 @@
   }
 }
 
+@layer components {
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 5px;
+  }
+
+  .scrollbar-light::-webkit-scrollbar-track {
+    background: theme("colors.zinc.200");
+  }
+
+  .scrollbar-light::-webkit-scrollbar-thumb {
+    background: theme("colors.zinc.400");
+    border-radius: 10px;
+  }
+
+  .scrollbar-light::-webkit-scrollbar-thumb:hover {
+    background: theme("colors.zinc.700");
+  }
+
+  .scrollbar-dark::-webkit-scrollbar-track {
+    background: #282c34;
+  }
+
+  .scrollbar-dark::-webkit-scrollbar-thumb {
+    background: #e8e8e8;
+    border-radius: 10px;
+  }
+
+  .scrollbar-dark::-webkit-scrollbar-thumb:hover {
+    background: #3b3d42;
+  }
+}
+
 .padding-7 {
   padding-top: 7px !important;
   padding-bottom: 7px !important;
@@ -25,22 +58,4 @@
 .code-modified::before,
 .code-modified::after {
   content: "" !important;
-}
-
-.scrollbar::-webkit-scrollbar {
-  width: 8px;
-  height: 5px;
-}
-
-.scrollbar::-webkit-scrollbar-track {
-  background: #282c34;
-}
-
-.scrollbar::-webkit-scrollbar-thumb {
-  background: #3b3d42;
-  border-radius: 10px;
-}
-
-.scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #e8e8e8;
 }
