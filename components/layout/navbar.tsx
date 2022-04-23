@@ -24,7 +24,7 @@ export const Navbar = (): JSX.Element => {
     <nav>
       <div className="flex max-w-3xl mx-auto p-6 font-mplusrounded">
         <NextLink href="/">
-          <a className="py-2 inline-block">Landrae</a>
+          <a className="font-semibold py-2 inline-block">Landrae</a>
         </NextLink>
         <Spacer />
         {links.map(({ name, href }) => (
