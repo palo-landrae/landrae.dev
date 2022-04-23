@@ -1,6 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import { Layout } from "@/components/layout";
-import { IProject } from "@/interfaces/IProject";
+import { Project } from "@/lib/types";
 import Image from "next/image";
 
 const projects = [
@@ -14,7 +14,7 @@ const projects = [
 ];
 
 interface IProps {
-  projects: IProject[];
+  projects: Project[];
 }
 
 const Projects: NextPage<IProps> = ({ projects }) => {
