@@ -7,7 +7,7 @@ export default class Document extends NextDocument {
       <Html lang="en">
         <Fonts />
         <Head />
-        <body className="dark:bg-zinc-900 dark:text-stone-100 font-mplusrounded scrollbar scrollbar-light dark:scrollbar-dark">
+        <body className="bg-dawn dark:bg-midnight text-midnight dark:text-dawn font-worksans scrollbar scrollbar-light dark:scrollbar-dark">
           <Main />
           <NextScript />
         </body>

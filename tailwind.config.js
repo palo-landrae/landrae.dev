@@ -1,3 +1,4 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -16,12 +17,13 @@ module.exports = {
         300: "300px",
       },
       fontFamily: {
-        mplusrounded: ["'M Plus Rounded 1c'"],
-        kodchasan: ["'Kodchasan'"],
+        worksans: ["'Work Sans'", ...fontFamily.sans],
       },
       colors: {
         oneDark: "#282c34",
         darkSkyBlue: "#74B3CE",
+        midnight: "#101110",
+        dawn: "#f9fbfa",
       },
       typography: ({ theme }) => ({
         dark: {

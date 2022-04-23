@@ -18,7 +18,6 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/lib/*": ["lib/*"],
-      "@/interfaces/*": ["interfaces/*"],
       "@/hooks/*": ["hooks/*"]
     }
   },

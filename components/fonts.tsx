@@ -3,10 +3,12 @@ import { Global } from "@emotion/react";
 const Fonts = () => (
   <Global
     styles={`
-      @import url('https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;700&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap');
-    }
-      `}
+      /* work-sans-latin */
+      @font-face {
+        font-family: "Work Sans";
+        src: url("/fonts/work-sans-v16-latin-regular.woff2") format('woff2'), url("/fonts/work-sans-v16-latin-regular.woff") format('woff'), url("/fonts/work-sans-v16-latin-regular.ttf") format('ttf');
+      }
+    `}
   />
 );
 

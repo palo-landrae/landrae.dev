@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import ILike from "@/interfaces/ILike";
+import { Like } from "@/lib/types";
 import { prisma } from "@/lib/prisma";
 
 export default async function handle(
@@ -23,7 +23,7 @@ export default async function handle(
     }
 
     if (req.method == "GET") {
-      const data: ILike = await prisma.blog.findUnique({
+      const data: Like = await prisma.blog.findUnique({
         where: {
           slug: slug,
         },

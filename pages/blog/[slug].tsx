@@ -1,24 +1,23 @@
 import type { NextPage } from "next";
-import { IPost } from "@/interfaces/IPost";
-import { prisma } from "@/lib/prisma";
+import Image from "next/image";
 import { Layout } from "@/components/layout";
+
 import { GetStaticPaths, GetStaticProps } from "next";
+import { prisma } from "@/lib/prisma";
+import { Post } from "@/lib/types";
 import { ParsedUrlQuery } from "querystring";
+
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { default as oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
+
 import moment from "moment";
-import Image from "next/image";
 import { LikeButton } from "@/components/like-button";
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
-}
-
-interface IProps {
-  post: IPost;
 }
 
 const urlBuilder = ({ id, width }) => {
@@ -29,7 +28,7 @@ const urlBlurBluider = ({ id, width }) => {
   return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},e_blur,q_1,f_auto,c_scale/${id}`;
 };
 
-const BlogPost: NextPage<IProps> = ({ post }) => {
+const BlogPost: NextPage = ({ post }: { post: Post }) => {
   return (
     <Layout title={post?.title || "Blog"} description={post?.description}>
       {post ? (
@@ -100,7 +99,7 @@ export default BlogPost;
 
 const NextImage = ({ node, children, src, alt, ...props }) => {
   return (
-    <div className="mx-auto w-full max-w-3xl block">
+    <div className="mx-auto w-full max-w-3xl block border rounded-lg">
       <Image
         className="rounded-lg"
         src={src}
@@ -189,7 +188,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params as IParams;
-  const post: IPost = await prisma.blog.findUnique({
+  const post: Post = await prisma.blog.findUnique({
     where: {
       slug: slug,
     },

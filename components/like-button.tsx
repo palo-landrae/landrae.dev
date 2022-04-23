@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useContext, useCallback } from "react";
 import { SessionContext } from "@/components/session";
 import useSWR from "swr";
-import ILike from "@/interfaces/ILike";
+import { Like } from "@/lib/types";
 import fetcher from "@/lib/fetcher";
 import { TwitterHeartIcon, TwitterHeartEmptyIcon } from "@/components/icons";
 
-export interface LikeButtonProps {
-  slug: string;
-  text?: boolean;
-}
-
-export const LikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
+export const LikeButton: React.FC<Like> = ({ slug, text }) => {
   const { likeSessionId } = useContext(SessionContext);
 
   const [userLiked, setUserLiked] = useState(false);
@@ -18,7 +13,7 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
   const [totalLikes, setTotalLikes] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { data } = useSWR<ILike>(`/api/likes/${slug}`, fetcher, {
+  const { data } = useSWR<Like>(`/api/likes/${slug}`, fetcher, {
     revalidateOnFocus: false,
     refreshInterval: 5000,
   });

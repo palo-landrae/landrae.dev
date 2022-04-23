@@ -1,18 +1,14 @@
+import { useState } from "react";
 import type { NextPage } from "next";
-import Image from "next/image";
 import { GetStaticProps } from "next";
-import { prisma } from "@/lib/prisma";
-import { Layout } from "@/components/layout";
-import { IPost } from "@/interfaces/IPost";
-import moment from "moment";
+import Image from "next/image";
 import Link from "next/link";
+import { prisma } from "@/lib/prisma";
+import { Post } from "@/lib/types";
+import { Layout } from "@/components/layout";
 import { LikeButton } from "@/components/like-button";
 import { MagnifyingGlassIcon } from "@/components/icons";
-import { useState } from "react";
-
-export interface Props {
-  posts: IPost[];
-}
+import moment from "moment";
 
 const urlBuilder = ({ id, width }) => {
   return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},q_75,f_auto,c_scale/${id}`;
@@ -22,7 +18,7 @@ const urlBlurBluider = ({ id, width }) => {
   return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},e_blur,q_1,f_auto,c_scale/${id}`;
 };
 
-const Blog: NextPage<Props> = ({ posts }) => {
+const Blog: NextPage = ({ posts }: { posts: Post[] }) => {
   const [searchValue, setSearchValue] = useState("");
   const filteredBlogPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -95,8 +91,8 @@ const Blog: NextPage<Props> = ({ posts }) => {
 
 export default Blog;
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
-  const posts: IPost[] = await prisma.blog.findMany({
+export const getStaticProps: GetStaticProps = async () => {
+  const posts: Post[] = await prisma.blog.findMany({
     select: {
       id: true,
       title: true,
