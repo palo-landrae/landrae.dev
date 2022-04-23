@@ -8,7 +8,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { default as oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
+import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
 import moment from "moment";
 import Image from "next/image";
 import { LikeButton } from "@/components/like-button";
@@ -82,6 +82,7 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
                 pre: PreBlock,
                 a: MarkdownLink,
                 table: Table,
+                img: NextImage,
               }}
             >
               {post.content}
@@ -96,6 +97,23 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
 };
 
 export default BlogPost;
+
+const NextImage = ({ node, children, src, alt, ...props }) => {
+  return (
+    <div className="mx-auto w-full max-w-3xl block">
+      <Image
+        className="rounded-lg"
+        src={src}
+        alt={alt}
+        layout="responsive"
+        width={640}
+        height={420}
+        unoptimized={true}
+        {...props}
+      />
+    </div>
+  );
+};
 
 const Table = ({ node, children, ...props }) => {
   return (

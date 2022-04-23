@@ -46,8 +46,8 @@ const Home: NextPage = () => {
             <Image
               alt="Blog post image"
               src="/images/profile.jpg"
-              width={256}
-              height={256}
+              width={160}
+              height={160}
             />
           </div>
         </div>
