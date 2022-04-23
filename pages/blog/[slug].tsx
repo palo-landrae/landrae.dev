@@ -73,7 +73,7 @@ const BlogPost: NextPage<IProps> = ({ post }) => {
               <LikeButton slug={post.slug} />
             </div>
           </div>
-          <div className="prose max-w-3xl">
+          <div className="prose prose-zinc dark:prose-dark max-w-3xl">
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
@@ -160,7 +160,10 @@ const CodeBlock = ({ node, inline, className, children, ...props }) => {
       {children}
     </SyntaxHighlighter>
   ) : (
-    <code className="bg-oneDark px-2 py-1 rounded-md code-modified" {...props}>
+    <code
+      className="bg-zinc-300 dark:bg-oneDark px-2 py-1 rounded-md code-modified"
+      {...props}
+    >
       {children}
     </code>
   );

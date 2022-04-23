@@ -33,7 +33,7 @@ export const Navbar = (): JSX.Element => {
               className={`${isActiveLink(href, router.pathname)
                   ? "font-semibold"
                   : "font-normal"
-                } flex flex-col mr-1 md:mr-2 md:mx-3 inline-block p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-all`}
+                } flex flex-col mr-1 md:mr-2 md:mx-3 inline-block p-2 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all`}
             >
               {name}
             </a>

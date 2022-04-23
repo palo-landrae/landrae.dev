@@ -24,7 +24,16 @@ module.exports = {
         darkSkyBlue: "#74B3CE",
       },
       typography: ({ theme }) => ({
-        DEFAULT: {
+        base: {
+          css: [
+            {
+              pre: {
+                padding: "0px",
+              },
+            },
+          ],
+        },
+        dark: {
           css: {
             "--tw-prose-body": theme("colors.stone[100]"),
             "--tw-prose-headings": theme("colors.stone[100]"),
@@ -41,16 +50,10 @@ module.exports = {
             "--tw-prose-pre-bg": theme("colors.oneDark"),
             "--tw-prose-th-borders": theme("colors.stone[100]"),
             "--tw-prose-td-borders": theme("colors.stone[300]"),
-            pre: {
-              padding: "0px",
-            },
           },
         },
       }),
     },
-  },
-  variants: {
-    typography: ["dark"],
   },
   plugins: [
     require("@tailwindcss/line-clamp"),

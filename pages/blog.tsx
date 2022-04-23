@@ -40,7 +40,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
             aria-label="Search articles"
             type="text"
             onChange={(e) => setSearchValue(e.target.value)}
-            className="block w-full rounded-md bg-zinc-800 text-white px-4 py-2"
+            className="block w-full rounded-md dark:bg-zinc-800 border dark:border-0 text-white px-4 py-2"
             placeholder="Search articles"
           />
           <div className="absolute w-5 h-5 text-gray-400 right-3 top-3 dark:text-gray-300">

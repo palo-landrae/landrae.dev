@@ -10,7 +10,7 @@ export const IconButton: React.FC<IconProps> = ({ children, href }) => {
   return (
     <Link href={href}>
       <a
-        className="inline-flex align-items-center justify-center bg-zinc-800 p-1 rounded-lg w-7 h-7"
+        className="inline-flex align-items-center justify-center dark:bg-zinc-800 p-1 rounded-lg w-7 h-7"
         target="_blank"
         rel="noopener noreferrer nofollow"
       >
