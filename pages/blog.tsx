@@ -33,7 +33,7 @@ const Blog: NextPage<Props> = ({ posts }) => {
         <h1 className="text-4xl">Blog</h1>
         <p className="py-2">
           I wrote this blog in order to share my passion with you. Feel free to
-          explore my personal blog and don't forget to leave a like!
+          explore my personal blog and don&#39;t forget to leave a like!
         </p>
         <div className="relative w-full mb-5">
           <input
