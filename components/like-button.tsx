@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from "react";
 import { SessionContext } from "@/components/session";
 import useSWR from "swr";
 import ILike from "@/interfaces/ILike";
+import fetcher from "@/lib/fetcher";
 import { TwitterHeartIcon, TwitterHeartEmptyIcon } from "@/components/icons";
 
 export interface LikeButtonProps {
@@ -16,9 +17,6 @@ export const LikeButton: React.FC<LikeButtonProps> = ({ slug, text }) => {
   const [likes, setLikes] = useState([]);
   const [totalLikes, setTotalLikes] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-
-  const fetcher = async (url: string) =>
-    await fetch(url).then((res) => res.json());
 
   const { data } = useSWR<ILike>(`/api/likes/${slug}`, fetcher, {
     revalidateOnFocus: false,

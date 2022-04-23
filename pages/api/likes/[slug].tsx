@@ -1,28 +1,41 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import ILike from "@/interfaces/ILike";
 import { prisma } from "@/lib/prisma";
 
-export default async function handle(req, res) {
-  const { slug } = req.query;
-  if (req.method == "POST") {
-    await prisma.blog.update({
-      where: {
-        slug: slug,
-      },
-      data: {
-        likes: req.body.likes,
-      },
-    });
-    res.status(200).json({ success: true });
-  } else {
-    const data: ILike = await prisma.blog.findUnique({
-      where: {
-        slug: slug,
-      },
-      select: {
-        slug: true,
-        likes: true,
-      },
-    });
-    res.json(JSON.parse(JSON.stringify(data)));
+export default async function handle(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  try {
+    const slug = req.query.slug.toString();
+
+    if (req.method == "POST") {
+      await prisma.blog.update({
+        where: {
+          slug: slug,
+        },
+        data: {
+          likes: req.body.likes,
+        },
+      });
+
+      return res.status(200).json({ success: true });
+    }
+
+    if (req.method == "GET") {
+      const data: ILike = await prisma.blog.findUnique({
+        where: {
+          slug: slug,
+        },
+        select: {
+          slug: true,
+          likes: true,
+        },
+      });
+
+      return res.status(200).json(JSON.parse(JSON.stringify(data)));
+    }
+  } catch (e) {
+    return res.status(500).json({ message: e.message });
   }
 }
