@@ -1,5 +1,5 @@
 import React from "react";
-import Link from 'next/link';
+import NextLink from 'next/link';
 import NowPlaying from '@/components/NowPlaying'
 
 const ExternalLink = ({ href, children }) => (
@@ -20,19 +20,19 @@ export const Footer: React.FC = () => {
       <NowPlaying />
       <div className="w-full max-w-3xl grid grid-cols-1 gap-4 pb-12 sm:grid-cols-3">
         <div className="flex flex-col space-y-4">
-          <Link href="/">
+          <NextLink href="/">
             <a className="text-zinc-500 hover:text-zinc-600 transition">Home</a>
-          </Link>
-          <Link href="/projects">
+          </NextLink>
+          <NextLink href="/projects">
             <a className="text-zinc-500 hover:text-zinc-600 transition">
               Projects
             </a>
-          </Link>
-          <Link href="/blog">
+          </NextLink>
+          <NextLink href="/blog">
             <a className="text-zinc-500 hover:text-zinc-600 transition">
               Blog
             </a>
-          </Link>
+          </NextLink>
         </div>
         <div className="flex flex-col space-y-4">
           <ExternalLink href="https://github.com/palo-landrae/">

@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps, router }: AppProps) {
         onExitComplete={() => window.scrollTo(0, 0)}
       >
         <ThemeProvider attribute="class">
-          <Component {...pageProps} key={url} />
+          <Component {...pageProps} canonical={url} key={url} />
         </ThemeProvider>
       </AnimatePresence>
     </SessionProvider>
