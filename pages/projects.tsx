@@ -1,6 +1,6 @@
-import type { GetStaticProps, NextPage } from "next";
-import { Layout } from "@/components/layout";
-import { Project } from "@/lib/types";
+import type {GetStaticProps, NextPage} from "next";
+import {Layout} from "@/components/layout";
+import {Project} from "@/lib/types";
 import Image from "next/image";
 
 const projects = [
@@ -17,13 +17,13 @@ interface IProps {
   projects: Project[];
 }
 
-const Projects: NextPage<IProps> = ({ projects }) => {
+const Projects: NextPage<IProps> = ({projects}) => {
   return (
     <Layout title="Projects" description="Landrae's Projects">
       {projects &&
         projects.map((project) => {
           return (
-            <>
+            <div key={project.title}>
               <p>{project.title}</p>
               <div className="mx-auto w-full max-w-xl block">
                 <Image
@@ -34,7 +34,7 @@ const Projects: NextPage<IProps> = ({ projects }) => {
                   height={200}
                 />
               </div>
-            </>
+            </div>
           );
         })}
     </Layout>
