@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HamburgerIcon, XMarkIcon } from '@/components/icons';
 import { motion } from 'framer-motion';
+import { table } from 'console';
 
 const MobileMenu: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,16 +17,18 @@ const MobileMenu: React.FC = () => {
   }
 
   const links = [
-    { name: "Home", to: "/", id: 1 },
-    { name: "Projects", to: "/projects", id: 2 },
-    { name: "Blog", to: "/blog", id: 3 },
+    { name: "Home", href: "/", target: '_self' },
+    { name: "Projects", href: "/projects", target: '_self' },
+    { name: "Blog", href: "/blog", target: '_self' },
+    { name: "GitHub", href: "https://github.com/palo-landrae", target: '_blank' },
+    { name: "Youtube", href: "https://youtube.com/c/Landrae", target: '_blank' },
+    { name: "Instagram", href: "https://www.instagram.com/landrae_dev", target: '_blank' }
   ];
 
-  const navVariants = {
+  const menuVariants = {
     open: { opacity: 1, x: 0 },
     close: { opacity: 0, x: "-100%" }
   }
-
 
   useEffect(() => {
     return function cleanup() {
@@ -35,26 +38,27 @@ const MobileMenu: React.FC = () => {
 
   return (
     <>
-      <button onClick={toggleMenu} className="z-50 relative md:hidden inline-block">
+      <button onClick={toggleMenu} className="z-50 w-10 h-10 relative md:hidden flex rounded-lg items-center justify-center  hover:ring-2 ring-gray-300  transition-all">
         {!isMenuOpen ? <HamburgerIcon /> : <XMarkIcon />}
       </button>
       {isMenuOpen &&
         <motion.nav
           animate={isMenuOpen ? "open" : 'closed'}
-          variants={navVariants}
+          variants={menuVariants}
           transition={{ duration: 0.5 }}
         >
           <motion.div
-            className="flex flex-col bg-dawn dark:bg-midnight top-0 left-0 z-40 absolute h-screen w-80 px-7 py-10"
+            className="flex flex-col bg-dawn dark:bg-midnight top-0 left-0 z-40 absolute h-screen w-80 px-12 py-16"
           >
-            {links.map(({ name, to, id }) => (
+            {links.map(({ name, href, target }) => (
               <motion.a
-                key={id}
-                href={to}
+                key={name}
+                href={href}
+                target={target}
                 whileHover={{ scale: 1.1 }}
-                className="mx-6 my-1 p-4"
+                className="p-2 border-b border-zinc-500"
               >
-                {name}
+                <span className="text-md">{name}</span>
               </motion.a>
             ))}
           </motion.div>
