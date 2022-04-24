@@ -45,7 +45,7 @@ const MobileMenu: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <motion.div
-            className="flex flex-col bg-midnight top-0 left-0 z-40 absolute h-screen w-80 px-7 py-10"
+            className="flex flex-col bg-dawn dark:bg-midnight top-0 left-0 z-40 absolute h-screen w-80 px-7 py-10"
           >
             {links.map(({ name, to, id }) => (
               <motion.a
