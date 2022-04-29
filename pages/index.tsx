@@ -1,11 +1,12 @@
-import type { NextPage } from "next";
-import { Layout } from "@/components/layout";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-import { BioYear, BioSection } from "@/components/bio";
+import type { NextPage } from 'next';
+import { Layout } from '@/components/layout';
+import Image from 'next/image';
+import dynamic from 'next/dynamic';
+import { BioYear, BioSection } from '@/components/bio';
+import Subscribe from '@/components/Subscribe';
 
 const Socials = dynamic(() =>
-  import("@/components/icons").then((mod) => mod.Socials)
+  import('@/components/icons').then((mod) => mod.Socials)
 );
 
 const Home: NextPage = () => {
@@ -78,6 +79,10 @@ const Home: NextPage = () => {
         </div>
       </div>
       {/* Bio-end */}
+
+      {/* Newsletter-start */}
+      <Subscribe />
+      {/* Newsletter-end */}
     </Layout>
   );
 };
