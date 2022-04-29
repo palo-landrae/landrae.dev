@@ -25,9 +25,17 @@ const Subscribe: React.FC = () => {
             'Content-Type': 'application/json',
           },
         });
-        return response.json();
+        if (response.ok) {
+          // If the response is ok than show the success alert
+          alert('Email registered successfully');
+        } else {
+          // Else throw an error with the message returned
+          // from the API
+          const error = await response.json();
+          throw new Error(error.message);
+        }
       };
-      fetchData().then((value) => console.log(value));
+      fetchData();
     }
   }, [token, email]);
 

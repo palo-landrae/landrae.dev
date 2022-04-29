@@ -12,15 +12,13 @@ export default async function handler(
     });
   }
   try {
-    const response = await fetch(
-      `https://hcaptcha.com/siteverify?response=${captchaToken}&secret=${process.env.HCAPTCHA_SECRET_KEY}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        },
-      }
-    );
+    const response = await fetch('https://hcaptcha.com/siteverify', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+      },
+      body: `response=${captchaToken}&secret=${process.env.HCAPTCHA_SECRET_KEY}`,
+    });
 
     const captchaValidation = await response.json();
 
