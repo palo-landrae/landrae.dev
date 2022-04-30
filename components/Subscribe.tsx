@@ -13,31 +13,28 @@ const Subscribe: React.FC = () => {
 
   useEffect(() => {
     if (token) {
-      var data = {
-        email: email,
-        captchaToken: token,
-      };
       const fetchData = async () => {
-        const response = await fetch(`/api/subscribe`, {
-          body: JSON.stringify(data),
+        const res = await fetch(`/api/subscribe`, {
+          body: JSON.stringify({
+            email: email,
+            captchaToken: token,
+          }),
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
         });
-        if (response.ok) {
-          // If the response is ok than show the success alert
-          alert('Email registered successfully');
-        } else {
-          // Else throw an error with the message returned
-          // from the API
-          const error = await response.json();
-          throw new Error(error.message);
+        const { error } = await res.json();
+        if (error) {
+          alert(error);
+          return;
         }
+        setEmail('');
+        alert(`Hooray! You're now on the list.`);
       };
       fetchData();
     }
-  }, [token, email]);
+  }, [token]);
 
   return (
     <form className="m-4" onSubmit={onSubmit}>

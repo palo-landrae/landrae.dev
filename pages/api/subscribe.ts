@@ -11,6 +11,7 @@ export default async function handler(
       error: 'Please provide the required fields',
     });
   }
+
   try {
     const response = await fetch('https://hcaptcha.com/siteverify', {
       method: 'POST',
@@ -23,33 +24,32 @@ export default async function handler(
     const captchaValidation = await response.json();
 
     if (captchaValidation.success) {
-      {
-        /*
-      const result = await fetch('https://www.getrevue.co/api/v2/subscribers', {
+      const result = await fetch('https://api.sendinblue.com/v3/contacts', {
         method: 'POST',
         headers: {
-          Authorization: `Token ${process.env.REVUE_API_KEY}`,
+          Accept: 'application/json',
           'Content-Type': 'application/json',
+          'api-key':
+            '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',
         },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email: email,
+        }),
       });
 
       const data = await result.json();
 
       if (!result.ok) {
-        return res.status(500).json({ error: data.error.email[0] });
+        return res.status(500).json({ error: data.message });
       }
 
       return res.status(201).json({ error: '' });
-        */
-      }
-      return res.status(200).send('OK');
     }
+
     return res.status(400).json({
-      message: 'Unproccesable request, Invalid captcha code',
+      error: 'Unproccesable request, Invalid captcha code',
     });
   } catch (error) {
-    console.log(error);
-    return res.status(422).json({ message: 'Something went wrong' });
+    return res.status(422).json({ error: 'Something went wrong' });
   }
 }
