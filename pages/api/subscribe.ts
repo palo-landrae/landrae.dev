@@ -29,8 +29,7 @@ export default async function handler(
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
-          'api-key':
-            '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',
+          'api-key': process.env.SENDINBLUE_API_KEY,
         },
         body: JSON.stringify({
           email: email,
