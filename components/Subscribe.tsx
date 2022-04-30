@@ -1,8 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import useSWR from 'swr';
+import { Subscribers } from '@/lib/types';
+import fetcher from '@/lib/fetcher';
 
 const Subscribe: React.FC = () => {
   const [email, setEmail] = useState('');
+  const { data } = useSWR<Subscribers>('api/subscribers', fetcher);
+  const subscriberCount = new Number(data?.count);
+
   const [token, setToken] = useState(null);
   const hcaptchaRef = useRef(null);
 
@@ -66,6 +72,11 @@ const Subscribe: React.FC = () => {
           onVerify={setToken}
           ref={hcaptchaRef}
         />
+        <p className="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
+          {`${
+            subscriberCount > 0 ? subscriberCount.toLocaleString() : '-'
+          } subscribers`}
+        </p>
       </div>
     </form>
   );

@@ -35,3 +35,7 @@ export type NowPlayingSong = {
   songUrl: string;
   title: string;
 };
+
+export type Subscribers = {
+  count: number;
+};
