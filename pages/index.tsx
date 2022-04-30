@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   return (
     <Layout title="Home" description="Landrae's personal website portfolio">
       {/* Introduction-start */}
-      <div className="px-6 my-3">
+      <div className="p-6">
         <h1 className="text-5xl">Hi🐼,</h1>
         <p className="text-base md:text-lg">
           Welcome to my portfolio

@@ -33,6 +33,7 @@ export default async function handler(
         },
         body: JSON.stringify({
           email: email,
+          listIds: [3],
         }),
       });
 
