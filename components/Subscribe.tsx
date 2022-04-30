@@ -54,8 +54,12 @@ const Subscribe: React.FC = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="rounded-lg px-2 py-1 w-full mr-2 bg-neutral-100 dark:bg-neutral-300 text-midnight border border-neutral-400"
+            required
           />
-          <button className="rounded-lg bg-blue-400 px-2 text-white">
+          <button
+            type="submit"
+            className="rounded-lg bg-blue-400 px-2 text-white"
+          >
             Subscribe
           </button>
         </div>
