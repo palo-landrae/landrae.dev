@@ -1,14 +1,14 @@
-import { useState } from "react";
-import type { NextPage } from "next";
-import { GetStaticProps } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { prisma } from "@/lib/prisma";
-import { Post } from "@/lib/types";
-import { Layout } from "@/components/layout";
-import { LikeButton } from "@/components/like-button";
-import { MagnifyingGlassIcon } from "@/components/icons";
-import moment from "moment";
+import { useState } from 'react';
+import type { NextPage } from 'next';
+import { GetStaticProps } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import prisma from '@/lib/prisma';
+import { Post } from '@/lib/types';
+import { Layout } from '@/components/layout';
+import { LikeButton } from '@/components/like-button';
+import { MagnifyingGlassIcon } from '@/components/icons';
+import moment from 'moment';
 
 const urlBuilder = ({ id, width }) => {
   return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},q_75,f_auto,c_scale/${id}`;
@@ -19,7 +19,7 @@ const urlBlurBluider = ({ id, width }) => {
 };
 
 const Blog: NextPage = ({ posts }: { posts: Post[] }) => {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState('');
   const filteredBlogPosts = posts.filter((post) =>
     post.title.toLowerCase().includes(searchValue.toLowerCase())
   );
@@ -51,7 +51,7 @@ const Blog: NextPage = ({ posts }: { posts: Post[] }) => {
               <div className="flex flex-col-reverse md:flex-row justify-items-center md:justify-around items-start mx-auto">
                 <div className="py-2 md:py-0 md:pr-3 w-full max-w-sm md:max-w-none mx-auto">
                   <span className="text-sm mr-4">
-                    Posted on {moment(post.date).format("LL")}
+                    Posted on {moment(post.date).format('LL')}
                   </span>
                   <LikeButton slug={post.slug} text={true} />
                   <h1 className="text-xl">{post.title}</h1>
@@ -103,7 +103,7 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     orderBy: [
       {
-        date: "desc",
+        date: 'desc',
       },
     ],
   });

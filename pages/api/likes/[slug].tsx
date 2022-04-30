@@ -1,6 +1,6 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { Like } from "@/lib/types";
-import { prisma } from "@/lib/prisma";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { Like } from '@/lib/types';
+import prisma from '@/lib/prisma';
 
 export default async function handle(
   req: NextApiRequest,
@@ -9,7 +9,7 @@ export default async function handle(
   try {
     const slug = req.query.slug.toString();
 
-    if (req.method == "POST") {
+    if (req.method == 'POST') {
       await prisma.blog.update({
         where: {
           slug: slug,
@@ -22,7 +22,7 @@ export default async function handle(
       return res.status(200).json({ success: true });
     }
 
-    if (req.method == "GET") {
+    if (req.method == 'GET') {
       const data: Like = await prisma.blog.findUnique({
         where: {
           slug: slug,

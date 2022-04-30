@@ -1,20 +1,20 @@
-import type { NextPage } from "next";
-import Image from "next/image";
-import { Layout } from "@/components/layout";
+import type { NextPage } from 'next';
+import Image from 'next/image';
+import { Layout } from '@/components/layout';
 
-import { GetStaticPaths, GetStaticProps } from "next";
-import { prisma } from "@/lib/prisma";
-import { Post } from "@/lib/types";
-import { ParsedUrlQuery } from "querystring";
+import { GetStaticPaths, GetStaticProps } from 'next';
+import prisma from '@/lib/prisma';
+import { Post } from '@/lib/types';
+import { ParsedUrlQuery } from 'querystring';
 
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
-import { default as oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism/one-dark";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import { default as oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism/one-dark';
 
-import moment from "moment";
-import { LikeButton } from "@/components/like-button";
+import moment from 'moment';
+import { LikeButton } from '@/components/like-button';
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -30,7 +30,7 @@ const urlBlurBluider = ({ id, width }) => {
 
 const BlogPost: NextPage = ({ post }: { post: Post }) => {
   return (
-    <Layout title={post?.title || "Blog"} description={post?.description}>
+    <Layout title={post?.title || 'Blog'} description={post?.description}>
       {post ? (
         <div key={post.slug} className="flex flex-col p-6">
           <div className="w-full relative min-w-sm">
@@ -64,7 +64,7 @@ const BlogPost: NextPage = ({ post }: { post: Post }) => {
               <div className="flex flex-col">
                 <strong className="text-lg">palo-landrae</strong>
                 <span className="text-sm">
-                  Posted on {moment(post.date).format("LL")}
+                  Posted on {moment(post.date).format('LL')}
                 </span>
               </div>
             </div>
@@ -147,7 +147,7 @@ const PreBlock = ({ node, children, ...props }) => {
 };
 
 const CodeBlock = ({ node, inline, className, children, ...props }) => {
-  const match = /language-(\w+)/.exec(className || "");
+  const match = /language-(\w+)/.exec(className || '');
   return !inline && match ? (
     <SyntaxHighlighter
       language={match[1]}

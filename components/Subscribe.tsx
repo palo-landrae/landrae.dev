@@ -19,7 +19,7 @@ const Subscribe: React.FC = () => {
 
   useEffect(() => {
     if (token) {
-      const fetchData = async () => {
+      const onHCaptchaVerified = async () => {
         const res = await fetch(`/api/subscribe`, {
           body: JSON.stringify({
             email: email,
@@ -38,9 +38,9 @@ const Subscribe: React.FC = () => {
         setEmail('');
         alert(`Hooray! You're now on the list.`);
       };
-      fetchData();
+      onHCaptchaVerified();
     }
-  }, [token]);
+  }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <form className="m-4" onSubmit={onSubmit}>
