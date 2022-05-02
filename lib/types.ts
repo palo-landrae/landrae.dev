@@ -17,6 +17,8 @@ export type Like = {
   slug: string;
   likes?: string[];
   text?: boolean;
+  count: number;
+  liked: boolean;
 };
 
 export type Project = {
