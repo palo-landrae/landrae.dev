@@ -4,6 +4,7 @@ import useSWR from 'swr';
 import { Like } from '@/lib/types';
 import fetcher from '@/lib/fetcher';
 import { TwitterHeartIcon, TwitterHeartEmptyIcon } from '@/components/icons';
+import { motion } from 'framer-motion';
 
 export const LikeButton: React.FC<Like> = ({ slug, text }) => {
   const { likeSessionId } = useContext(SessionContext);
@@ -24,7 +25,6 @@ export const LikeButton: React.FC<Like> = ({ slug, text }) => {
   }, [fetchLikes]);
 
   const postData = (slug: string, likeSessionId: string) => {
-    setIsLoading(true);
     fetch(`/api/likes/${slug}/${likeSessionId}`, {
       method: 'POST',
     }).then((res) => {
@@ -33,9 +33,17 @@ export const LikeButton: React.FC<Like> = ({ slug, text }) => {
   };
 
   const handlePress = () => {
+    setIsLoading(true);
     setTotalLikes((value) => (userLiked ? value - 1 : value + 1));
     setUserLiked(!userLiked);
     postData(slug, likeSessionId);
+  };
+
+  const heartVariants = {
+    like: {
+      scale: [0.25, 1.25, 1],
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
@@ -50,9 +58,13 @@ export const LikeButton: React.FC<Like> = ({ slug, text }) => {
           className="inline-flex items-center space-x-2"
           disabled={isLoading}
         >
-          <div className="w-7 h-7 self-center">
+          <motion.div
+            variants={heartVariants}
+            animate={userLiked ? 'like' : ''}
+            className="w-7 h-7 self-center"
+          >
             {userLiked ? <TwitterHeartIcon /> : <TwitterHeartEmptyIcon />}
-          </div>
+          </motion.div>
           <span className="text-lg">
             {totalLikes ? totalLikes.toLocaleString() : '0'}
           </span>
