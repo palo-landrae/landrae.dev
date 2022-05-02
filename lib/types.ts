@@ -15,10 +15,7 @@ export type Post = {
 export type Like = {
   id?: string;
   slug: string;
-  likes?: string[];
   text?: boolean;
-  count: number;
-  liked: boolean;
 };
 
 export type Project = {
