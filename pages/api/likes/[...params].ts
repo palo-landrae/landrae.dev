@@ -6,9 +6,8 @@ export default async function handle(
   res: NextApiResponse
 ) {
   try {
-    const { params } = req.query;
-    const slug = params[0].toString();
-    const sessionId = params[1].toString();
+    const slug = req.query.params[0].toString();
+    const sessionId = req.query.params[1].toString();
 
     const session = await db
       .collection(`likes/${slug}/likers`)

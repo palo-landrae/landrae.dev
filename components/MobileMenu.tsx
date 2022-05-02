@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { HamburgerIcon, XMarkIcon } from "@/components/icons";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from 'react';
+import { HamburgerIcon, XMarkIcon } from '@/components/Icons';
+import { motion } from 'framer-motion';
 
 const MobileMenu: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -8,42 +8,42 @@ const MobileMenu: React.FC = () => {
   const toggleMenu = () => {
     if (isMenuOpen) {
       setIsMenuOpen(false);
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     } else {
       setIsMenuOpen(true);
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
     }
   };
 
   const links = [
-    { name: "Home", href: "/", target: "_self" },
-    { name: "Projects", href: "/projects", target: "_self" },
-    { name: "Blog", href: "/blog", target: "_self" },
+    { name: 'Home', href: '/', target: '_self' },
+    { name: 'Projects', href: '/projects', target: '_self' },
+    { name: 'Blog', href: '/blog', target: '_self' },
     {
-      name: "GitHub",
-      href: "https://github.com/palo-landrae",
-      target: "_blank",
+      name: 'GitHub',
+      href: 'https://github.com/palo-landrae',
+      target: '_blank',
     },
     {
-      name: "Youtube",
-      href: "https://youtube.com/c/Landrae",
-      target: "_blank",
+      name: 'Youtube',
+      href: 'https://youtube.com/c/Landrae',
+      target: '_blank',
     },
     {
-      name: "Instagram",
-      href: "https://www.instagram.com/landrae_dev",
-      target: "_blank",
+      name: 'Instagram',
+      href: 'https://www.instagram.com/landrae_dev',
+      target: '_blank',
     },
   ];
 
   const menuVariants = {
     open: { opacity: 1, x: 0 },
-    close: { opacity: 0, x: "-100%" },
+    close: { opacity: 0, x: '-100%' },
   };
 
   useEffect(() => {
     return function cleanup() {
-      document.body.style.overflow = "";
+      document.body.style.overflow = '';
     };
   }, []);
 
@@ -57,7 +57,7 @@ const MobileMenu: React.FC = () => {
       </button>
       {isMenuOpen && (
         <motion.nav
-          animate={isMenuOpen ? "open" : "closed"}
+          animate={isMenuOpen ? 'open' : 'closed'}
           variants={menuVariants}
           transition={{ duration: 0.5 }}
         >

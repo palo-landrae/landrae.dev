@@ -1,24 +1,24 @@
-import NextLink from "next/link";
-import { useRouter } from "next/router";
-import { isActiveLink } from "@/lib/utils";
-import ThemeButton from "../theme-button";
-import { Spacer } from "./spacer";
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { isActiveLink } from '@/lib/utils';
+import ThemeButton from '@/components/ThemeButton';
+import { Spacer } from './Spacer';
 import MobileMenu from '@/components/MobileMenu';
 
 export const Navbar = (): JSX.Element => {
   const router = useRouter();
   const links = [
     {
-      href: "/",
-      name: "Home",
+      href: '/',
+      name: 'Home',
     },
     {
-      href: "/projects",
-      name: "Projects",
+      href: '/projects',
+      name: 'Projects',
     },
     {
-      href: "/blog",
-      name: "Blog",
+      href: '/blog',
+      name: 'Blog',
     },
   ];
   return (
@@ -32,10 +32,11 @@ export const Navbar = (): JSX.Element => {
         {links.map(({ name, href }) => (
           <NextLink key={href} href={href}>
             <a
-              className={`${isActiveLink(href, router.pathname)
-                ? "font-semibold"
-                : "font-normal"
-                } flex flex-col mr-1 md:mr-2 md:mx-3 hidden md:inline-block p-2 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all`}
+              className={`${
+                isActiveLink(href, router.pathname)
+                  ? 'font-semibold'
+                  : 'font-normal'
+              } flex flex-col mr-1 md:mr-2 md:mx-3 hidden md:inline-block p-2 rounded-lg hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all`}
             >
               {name}
             </a>

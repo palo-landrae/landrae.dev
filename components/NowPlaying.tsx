@@ -7,7 +7,7 @@ import { animate } from 'motion';
 
 import fetcher from '@/lib/fetcher';
 import { NowPlayingSong } from '@/lib/types';
-import { SpotifyIcon } from '@/components/icons';
+import { SpotifyIcon } from '@/components/Icons';
 
 function AnimatedBars() {
   useEffect(() => {
@@ -17,13 +17,13 @@ function AnimatedBars() {
         transform: [
           'scaleY(1.0) translateY(0rem)',
           'scaleY(1.5) translateY(-0.082rem)',
-          'scaleY(1.0) translateY(0rem)'
-        ]
+          'scaleY(1.0) translateY(0rem)',
+        ],
       },
       {
         duration: 1.0,
         repeat: Infinity,
-        easing: ['ease-in-out']
+        easing: ['ease-in-out'],
       }
     );
     animate(
@@ -32,14 +32,14 @@ function AnimatedBars() {
         transform: [
           'scaleY(1.0) translateY(0rem)',
           'scaleY(3) translateY(-0.083rem)',
-          'scaleY(1.0) translateY(0rem)'
-        ]
+          'scaleY(1.0) translateY(0rem)',
+        ],
       },
       {
         delay: 0.2,
         duration: 1.5,
         repeat: Infinity,
-        easing: ['ease-in-out']
+        easing: ['ease-in-out'],
       }
     );
     animate(
@@ -48,14 +48,14 @@ function AnimatedBars() {
         transform: [
           'scaleY(1.0)  translateY(0rem)',
           'scaleY(0.5) translateY(0.37rem)',
-          'scaleY(1.0)  translateY(0rem)'
-        ]
+          'scaleY(1.0)  translateY(0rem)',
+        ],
       },
       {
         delay: 0.3,
         duration: 1.5,
         repeat: Infinity,
-        easing: ['ease-in-out']
+        easing: ['ease-in-out'],
       }
     );
   }, []);
@@ -81,11 +81,7 @@ export default function NowPlaying() {
   const { data } = useSWR<NowPlayingSong>('/api/now-playing', fetcher);
   return (
     <div className="flex flex-row-reverse items-center mb-8 sm:flex-row space-x-0 sm:space-x-2 w-full">
-      {data?.songUrl ? (
-        <AnimatedBars />
-      ) : (
-        <SpotifyIcon />
-      )}
+      {data?.songUrl ? <AnimatedBars /> : <SpotifyIcon />}
       <div className="inline-flex flex-col sm:flex-row w-full max-w-full truncate text-base">
         {data?.songUrl ? (
           <a

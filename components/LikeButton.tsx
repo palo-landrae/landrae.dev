@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
-import { SessionContext } from '@/components/session';
+import { SessionContext } from '@/components/Session';
 import useSWR from 'swr';
 import { Like } from '@/lib/types';
 import fetcher from '@/lib/fetcher';
-import { TwitterHeartIcon, TwitterHeartEmptyIcon } from '@/components/icons';
+import { TwitterHeartIcon, TwitterHeartEmptyIcon } from '@/components/Icons';
 import { motion } from 'framer-motion';
 
 export const LikeButton: React.FC<Like> = ({ slug, text }) => {
@@ -44,6 +44,9 @@ export const LikeButton: React.FC<Like> = ({ slug, text }) => {
       scale: [0.25, 1.25, 1],
       transition: { duration: 0.5 },
     },
+    unlike: {
+      scale: 1,
+    },
   };
 
   return (
@@ -60,7 +63,7 @@ export const LikeButton: React.FC<Like> = ({ slug, text }) => {
         >
           <motion.div
             variants={heartVariants}
-            animate={userLiked ? 'like' : ''}
+            animate={userLiked ? 'like' : 'unlike'}
             className="w-7 h-7 self-center"
           >
             {userLiked ? <TwitterHeartIcon /> : <TwitterHeartEmptyIcon />}

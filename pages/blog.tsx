@@ -6,8 +6,8 @@ import Link from 'next/link';
 import prisma from '@/lib/prisma';
 import { Post } from '@/lib/types';
 import { Layout } from '@/components/layout';
-import { LikeButton } from '@/components/like-button';
-import { MagnifyingGlassIcon } from '@/components/icons';
+import { LikeButton } from '@/components/LikeButton';
+import { MagnifyingGlassIcon } from '@/components/Icons';
 import moment from 'moment';
 
 const urlBuilder = ({ id, width }) => {

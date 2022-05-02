@@ -1,8 +1,8 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
-import { AnimatePresence } from "framer-motion";
-import { SessionProvider } from "@/components/session";
-import { ThemeProvider } from "next-themes";
+import '../styles/globals.css';
+import type { AppProps } from 'next/app';
+import { AnimatePresence } from 'framer-motion';
+import { SessionProvider } from '@/components/Session';
+import { ThemeProvider } from 'next-themes';
 
 declare const window: any;
 

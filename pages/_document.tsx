@@ -1,5 +1,5 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
-import Fonts from '@/components/fonts';
+import Fonts from '@/components/Fonts';
 
 export default class Document extends NextDocument {
   render() {

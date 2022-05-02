@@ -14,7 +14,7 @@ import rehypeRaw from 'rehype-raw';
 import { default as oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism/one-dark';
 
 import moment from 'moment';
-import { LikeButton } from '@/components/like-button';
+import { LikeButton } from '@/components/LikeButton';
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -69,7 +69,7 @@ const BlogPost: NextPage = ({ post }: { post: Post }) => {
               </div>
             </div>
             <div className="inline-flex mx-2 items-center">
-              <LikeButton slug={post.slug} />
+              <LikeButton slug={post.slug} text={false} />
             </div>
           </div>
           <div className="prose prose-zinc dark:prose-dark prose-pre:p-0 prose-pre:bg-oneDark max-w-3xl">

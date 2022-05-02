@@ -1,9 +1,9 @@
-import React from "react";
-import Head from "next/head";
-import { Navbar } from "./navbar";
-import { Footer } from "./footer";
-import { Spacer } from "./spacer";
-import { motion } from "framer-motion";
+import React from 'react';
+import Head from 'next/head';
+import { Navbar } from './Navbar';
+import { Footer } from './Footer';
+import { Spacer } from './Spacer';
+import { motion } from 'framer-motion';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -22,8 +22,8 @@ export const Layout: React.FC<LayoutProps> = ({
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
     exit: { opacity: 0, y: 30 },
-    transition: { type: "linear" }
-  }
+    transition: { type: 'linear' },
+  };
 
   return (
     <>
