@@ -13,7 +13,11 @@ export const LikeButton: React.FC<Like> = ({ slug, text }) => {
   const [totalLikes, setTotalLikes] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { data } = useSWR<Like>(`/api/likes/${slug}/${likeSessionId}`, fetcher);
+  const { data } = useSWR<Like>(
+    `/api/likes/${slug}/${likeSessionId}`,
+    fetcher,
+    { revalidateOnMount: true, revalidateOnFocus: false }
+  );
 
   const fetchLikes = useCallback(() => {
     setTotalLikes(data?.count);

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/lib/prisma';
+import supabase from '@/lib/supabase';
 
 export default async function handle(
   req: NextApiRequest,
@@ -9,46 +9,31 @@ export default async function handle(
     const slug = req.query.params[0].toString();
     const sessionId = req.query.params[1].toString();
 
-    const session = await prisma.likes.upsert({
-      where: {
-        slug: slug,
-      },
-      create: {
-        slug: slug,
-        sessions: [],
-        count: 0,
-      },
-      update: {},
-    });
+    // query to get like value
+    const { data } = await supabase
+      .from('like')
+      .select('uid, like')
+      .match({ slug: slug, sessionID: sessionId });
 
-    const sessionExists = session.sessions.includes(sessionId);
+    const liked = data[0]?.like || false;
+    const uid = data[0]?.uid || null;
 
     if (req.method == 'GET') {
-      if (!session) return res.status(500).json({ message: 'Server error' });
-      return res
-        .status(200)
-        .json({ count: session.count, liked: sessionExists });
+      // query to count number of likes
+      const { count } = await supabase
+        .from('like')
+        .select('sessionID', { count: 'exact' })
+        .is('like', true);
+      return res.status(200).json({ count: count, liked: liked });
     }
 
     if (req.method == 'POST') {
-      const result = await prisma.likes.update({
-        where: {
-          slug: slug,
-        },
-        data: {
-          sessions: {
-            set: sessionExists
-              ? session.sessions.filter((id) => id !== sessionId)
-              : [...session.sessions, sessionId],
-          },
-          count: {
-            set: sessionExists ? session.count - 1 : session.count + 1,
-          },
-        },
-      });
-
-      if (!result) return res.status(500).json({ message: 'Server error' });
-
+      await supabase
+        .from('like')
+        .upsert(
+          { uid: uid, slug: slug, sessionID: sessionId, like: !liked },
+          { onConflict: 'uid' }
+        );
       return res.status(200).json({ success: true });
     }
   } catch (e) {
