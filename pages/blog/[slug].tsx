@@ -15,6 +15,7 @@ import { default as oneDark } from 'react-syntax-highlighter/dist/cjs/styles/pri
 
 import moment from 'moment';
 import { LikeButton } from '@/components/LikeButton';
+import { useEffect } from 'react';
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -29,6 +30,11 @@ const urlBlurBluider = ({ id, width }) => {
 };
 
 const BlogPost: NextPage = ({ post }: { post: Post }) => {
+  useEffect(() => {
+    fetch(`/api/views/${post.slug}`, {
+      method: 'POST',
+    });
+  }, []);
   return (
     <Layout title={post?.title || 'Blog'} description={post?.description}>
       {post ? (
@@ -202,7 +208,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       date: true,
       content: true,
       slug: true,
-      likes: true,
     },
   });
   return {

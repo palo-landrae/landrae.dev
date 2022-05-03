@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { db } from '@/lib/firebase';
+import prisma from '@/lib/prisma';
 
 export default async function handle(
   req: NextApiRequest,
@@ -9,23 +9,45 @@ export default async function handle(
     const slug = req.query.params[0].toString();
     const sessionId = req.query.params[1].toString();
 
-    const session = await db
-      .collection(`likes/${slug}/likers`)
-      .doc(sessionId)
-      .get();
+    const session = await prisma.likes.upsert({
+      where: {
+        slug: slug,
+      },
+      create: {
+        slug: slug,
+        sessions: [],
+        count: 0,
+      },
+      update: {},
+    });
+
+    const sessionExists = session.sessions.includes(sessionId);
 
     if (req.method == 'GET') {
-      const docs = await db.collection(`likes/${slug}/likers`).get();
-      return res.status(200).json({ count: docs.size, liked: session.exists });
+      if (!session) return res.status(500).json({ message: 'Server error' });
+      return res
+        .status(200)
+        .json({ count: session.count, liked: sessionExists });
     }
 
     if (req.method == 'POST') {
-      const docRef = db.collection(`likes/${slug}/likers`).doc(sessionId);
-      const result = await (session.exists ? docRef.delete() : docRef.set({}));
+      const result = await prisma.likes.update({
+        where: {
+          slug: slug,
+        },
+        data: {
+          sessions: {
+            set: sessionExists
+              ? session.sessions.filter((id) => id !== sessionId)
+              : [...session.sessions, sessionId],
+          },
+          count: {
+            set: sessionExists ? session.count - 1 : session.count + 1,
+          },
+        },
+      });
 
-      if (!result) {
-        return res.status(500).json({ message: 'Server error' });
-      }
+      if (!result) return res.status(500).json({ message: 'Server error' });
 
       return res.status(200).json({ success: true });
     }

@@ -17,16 +17,19 @@ model blog {
   img_header_url    String
   img_provider      String
   img_thumbnail_url String
-  likes             String[]
   slug              String @unique
   title             String
 }
 
-model projects {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
-  color       String
-  demo        String
-  description String
-  git_repo    String
-  title       String
+model views {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug              String @unique
+  count             Int
+}
+
+model likes {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  slug              String @unique
+  sessions          String[]
+  count             Int
 }

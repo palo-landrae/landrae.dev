@@ -9,11 +9,9 @@ export type Post = {
   date: Date;
   slug: string;
   content?: string;
-  likes?: string[];
 };
 
 export type Like = {
-  id?: string;
   slug: string;
   text?: boolean;
   count?: number;
@@ -38,5 +36,10 @@ export type NowPlayingSong = {
 };
 
 export type Subscribers = {
+  count: number;
+};
+
+export type Views = {
+  slug: string;
   count: number;
 };
