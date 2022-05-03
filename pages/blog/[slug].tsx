@@ -34,7 +34,7 @@ const BlogPost: NextPage = ({ post }: { post: Post }) => {
     fetch(`/api/views/${post.slug}`, {
       method: 'POST',
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Layout title={post?.title || 'Blog'} description={post?.description}>
       {post ? (
