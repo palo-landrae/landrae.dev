@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import supabase from '@/lib/supabase';
+import { v4 as uuidv4 } from 'uuid';
 
 export default async function handle(
   req: NextApiRequest,
@@ -16,7 +17,7 @@ export default async function handle(
       .match({ slug: slug, sessionID: sessionId });
 
     const liked = data[0]?.like || false;
-    const uid = data[0]?.uid || null;
+    const uid = data[0]?.uid || uuidv4();
 
     if (req.method == 'GET') {
       // query to count number of likes
@@ -28,12 +29,13 @@ export default async function handle(
     }
 
     if (req.method == 'POST') {
-      await supabase
+      const { error } = await supabase
         .from('like')
         .upsert(
           { uid: uid, slug: slug, sessionID: sessionId, like: !liked },
           { onConflict: 'uid' }
         );
+      if (error) return res.status(500).send('Server Error');
       return res.status(200).json({ success: true });
     }
   } catch (e) {
