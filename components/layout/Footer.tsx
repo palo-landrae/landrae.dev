@@ -4,7 +4,7 @@ import NowPlaying from '@/components/NowPlaying';
 
 const ExternalLink = ({ href, children }) => (
   <a
-    className="text-gray-500 hover:text-gray-600 transition"
+    className="text-zinc-500 hover:text-zinc-600 transition"
     target="_blank"
     rel="noopener noreferrer"
     href={href}
@@ -20,7 +20,7 @@ export const Footer: React.FC = () => {
       <NowPlaying />
       <div className="w-full max-w-3xl grid grid-cols-1 gap-4 pb-12 sm:grid-cols-3">
         <div className="flex flex-col space-y-4">
-          <h4>Landrae.dev</h4>
+          <h4>Landrae</h4>
           <NextLink href="/">
             <a className="text-zinc-500 hover:text-zinc-600 transition">Home</a>
           </NextLink>
