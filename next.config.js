@@ -11,4 +11,7 @@ module.exports = {
     domains: ["images.unsplash.com", "res.cloudinary.com"],
   },
   pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
+  experimental: {
+    outputStandalone: true,
+  },
 };
