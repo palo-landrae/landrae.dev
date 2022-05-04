@@ -3,12 +3,12 @@ import type { NextPage } from 'next';
 import { GetStaticProps } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import prisma from '@/lib/prisma';
 import { Post } from '@/lib/types';
 import { Layout } from '@/components/layout';
 import { LikeButton } from '@/components/LikeButton';
 import { MagnifyingGlassIcon } from '@/components/Icons';
 import moment from 'moment';
+import supabase from '@/lib/supabase';
 
 const urlBuilder = ({ id, width }) => {
   return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},q_75,f_auto,c_scale/${id}`;
@@ -51,7 +51,7 @@ const Blog: NextPage = ({ posts }: { posts: Post[] }) => {
               <div className="flex flex-col-reverse md:flex-row justify-items-center md:justify-around items-start mx-auto">
                 <div className="py-2 md:py-0 md:pr-3 w-full max-w-sm md:max-w-none mx-auto">
                   <span className="text-sm mr-4">
-                    Posted on {moment(post.date).format('LL')}
+                    Posted on {moment(post.created_at).format('LL')}
                   </span>
                   <LikeButton slug={post.slug} text={true} />
                   <h1 className="text-xl">{post.title}</h1>
@@ -92,25 +92,14 @@ const Blog: NextPage = ({ posts }: { posts: Post[] }) => {
 export default Blog;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts: Post[] = await prisma.blog.findMany({
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      img_thumbnail_url: true,
-      date: true,
-      slug: true,
-    },
-    orderBy: [
-      {
-        date: 'desc',
-      },
-    ],
-  });
+  const { data }: { data: Post[] } = await supabase
+    .from('blog')
+    .select('id, title, description, img_thumbnail_url, created_at, slug')
+    .order('created_at', { ascending: false });
+
   return {
     props: {
-      posts: JSON.parse(JSON.stringify(posts)),
+      posts: JSON.parse(JSON.stringify(data)),
     },
-    revalidate: 600,
   };
 };

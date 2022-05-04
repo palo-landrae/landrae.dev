@@ -1,6 +1,6 @@
 import React, { useEffect, createContext } from 'react';
 import { UseStorageHook } from '@/hooks/UseStorageHook';
-import { generateRandomString } from '@/hooks/generate-random-string';
+import { v4 as uuidv4 } from 'uuid';
 
 interface SessionContextProps {
   likeSessionId: string;
@@ -18,7 +18,7 @@ export const SessionProvider: React.FC<IProps> = ({ children }) => {
   const getSessionID = () => {
     const storedId = getItem('like-session-id', 'local');
     if (!storedId) {
-      const newSessionID = generateRandomString(21);
+      const newSessionID = uuidv4();
       return newSessionID;
     }
     return storedId;

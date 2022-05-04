@@ -6,9 +6,10 @@ export type Post = {
   img_header_url?: string;
   img_thumbnail_url?: string;
   img_author?: string;
-  date: Date;
+  date?: Date;
   slug: string;
   content?: string;
+  created_at?: Date;
 };
 
 export type Like = {
