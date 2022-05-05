@@ -204,7 +204,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   return {
     props: {
-      post: JSON.parse(JSON.stringify(data)),
+      post: JSON.parse(JSON.stringify(data[0])),
     },
   };
 };
