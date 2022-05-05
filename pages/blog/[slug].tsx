@@ -16,6 +16,7 @@ import { default as oneDark } from 'react-syntax-highlighter/dist/cjs/styles/pri
 import moment from 'moment';
 import { LikeButton } from '@/components/LikeButton';
 import { useEffect } from 'react';
+import supabase from '@/lib/supabase';
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -70,7 +71,7 @@ const BlogPost: NextPage = ({ post }: { post: Post }) => {
               <div className="flex flex-col">
                 <strong className="text-lg">palo-landrae</strong>
                 <span className="text-sm">
-                  Posted on {moment(post.date).format('LL')}
+                  Posted on {moment(post.created_at).format('LL')}
                 </span>
               </div>
             </div>
@@ -194,26 +195,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params as IParams;
-  const post: Post = await prisma.blog.findUnique({
-    where: {
-      slug: slug,
-    },
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      img_provider: true,
-      img_header_url: true,
-      img_author: true,
-      date: true,
-      content: true,
-      slug: true,
-    },
-  });
+  const { data } = await supabase
+    .from('blog')
+    .select(
+      'id, title, description, img_provider, img_header_url, img_author, created_at, content, slug'
+    )
+    .match({ slug: slug });
+
   return {
     props: {
-      post: JSON.parse(JSON.stringify(post)),
+      post: JSON.parse(JSON.stringify(data)),
     },
-    revalidate: 1800,
   };
 };
