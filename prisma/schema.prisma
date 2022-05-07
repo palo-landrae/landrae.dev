@@ -11,10 +11,11 @@ datasource db {
 
 model blog {
   id                Int      @id @default(autoincrement())
-  slug              String   @db.VarChar(64)
+  slug              String   @unique(map: "slug") @db.VarChar(64)
   content           String   @db.Text
   created_at        DateTime @default(now()) @db.DateTime(6)
   description       String   @db.VarChar(128)
+  file_name         String   @db.VarChar(64)
   img_author        String?  @db.VarChar(32)
   img_header_url    String   @db.VarChar(255)
   img_provider      String?  @db.VarChar(32)
@@ -24,12 +25,12 @@ model blog {
 
 model likes {
   id        String  @id @db.VarChar(36)
-  sessionID String  @db.VarChar(255)
-  slug      String  @db.VarChar(255)
+  sessionID String  @db.VarChar(36)
+  slug      String  @db.VarChar(64)
   liked     Boolean @default(false)
 }
 
 model views {
   slug  String @id @db.VarChar(64)
-  count Int
+  count Int    @default(1)
 }
