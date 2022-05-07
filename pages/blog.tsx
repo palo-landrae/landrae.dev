@@ -8,7 +8,7 @@ import { Layout } from '@/components/layout';
 import { LikeButton } from '@/components/LikeButton';
 import { MagnifyingGlassIcon } from '@/components/Icons';
 import moment from 'moment';
-import supabase from '@/lib/supabase';
+import prisma from '@/lib/prisma';
 
 const urlBuilder = ({ id, width }) => {
   return `https://res.cloudinary.com/dispfvh1a/image/upload/w_${width},q_75,f_auto,c_scale/${id}`;
@@ -92,14 +92,23 @@ const Blog: NextPage = ({ posts }: { posts: Post[] }) => {
 export default Blog;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data }: { data: Post[] } = await supabase
-    .from('blog')
-    .select('id, title, description, img_thumbnail_url, created_at, slug')
-    .order('created_at', { ascending: false });
+  const posts: Post[] = await prisma.blog.findMany({
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      img_thumbnail_url: true,
+      created_at: true,
+      slug: true,
+    },
+    orderBy: {
+      created_at: 'desc',
+    },
+  });
 
   return {
     props: {
-      posts: JSON.parse(JSON.stringify(data)),
+      posts: JSON.parse(JSON.stringify(posts)),
     },
   };
 };

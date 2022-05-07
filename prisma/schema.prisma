@@ -1,35 +1,35 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
+  referentialIntegrity = "prisma"
 }
 
 model blog {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  content           String
-  date              DateTime @db.Date
-  description       String
-  file_name         String
-  img_author        String
-  img_header_url    String
-  img_provider      String
-  img_thumbnail_url String
-  slug              String @unique
-  title             String
-}
-
-model views {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  slug              String @unique
-  count             Int
+  id                Int      @id @default(autoincrement())
+  slug              String   @db.VarChar(64)
+  content           String   @db.Text
+  created_at        DateTime @default(now()) @db.DateTime(6)
+  description       String   @db.VarChar(128)
+  img_author        String?  @db.VarChar(32)
+  img_header_url    String   @db.VarChar(255)
+  img_provider      String?  @db.VarChar(32)
+  img_thumbnail_url String   @db.VarChar(255)
+  title             String   @db.VarChar(64)
 }
 
 model likes {
-  id                String   @id @default(auto()) @map("_id") @db.ObjectId
-  slug              String @unique
-  sessions          String[]
-  count             Int
+  id        String  @id @db.VarChar(36)
+  sessionID String  @db.VarChar(255)
+  slug      String  @db.VarChar(255)
+  liked     Boolean @default(false)
+}
+
+model views {
+  slug  String @id @db.VarChar(64)
+  count Int
 }

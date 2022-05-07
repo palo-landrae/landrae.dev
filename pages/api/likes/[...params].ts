@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import supabase from '@/lib/supabase';
 import { v4 as uuidv4 } from 'uuid';
+import prisma from '@/lib/prisma';
 
 export default async function handle(
   req: NextApiRequest,
@@ -10,34 +10,41 @@ export default async function handle(
     const slug = req.query.params[0].toString();
     const sessionId = req.query.params[1].toString();
 
-    // query to get like value
-    const { data, error } = await supabase
-      .from('likes')
-      .select('uid, like')
-      .match({ slug: slug, sessionID: sessionId });
-    if (error) return res.status(500).send('Server Error');
+    const data = await prisma.likes.findFirst({
+      where: {
+        sessionID: sessionId,
+        slug: slug,
+      },
+      select: {
+        id: true,
+        liked: true,
+      },
+    });
 
-    const liked = data[0]?.like || false;
-    const uid = data[0]?.uid || uuidv4();
+    const liked = data?.liked || false;
+    const uid = data?.id || uuidv4();
 
     if (req.method == 'GET') {
       // query to count number of likes
-      const { count, error } = await supabase
-        .from('likes')
-        .select('sessionID', { count: 'exact' })
-        .is('like', true);
-      if (error) return res.status(500).json({ message: error });
+      const count = await prisma.likes.count({ where: { liked: true } });
       return res.status(200).json({ count: count, liked: liked });
     }
 
     if (req.method == 'POST') {
-      const { error } = await supabase
-        .from('likes')
-        .upsert(
-          { uid: uid, slug: slug, sessionID: sessionId, like: !liked },
-          { onConflict: 'uid' }
-        );
-      if (error) return res.status(500).json({ message: error });
+      await prisma.likes.upsert({
+        where: {
+          id: uid,
+        },
+        create: {
+          id: uid,
+          sessionID: sessionId,
+          slug: slug,
+          liked: !liked,
+        },
+        update: {
+          liked: !liked,
+        },
+      });
       return res.status(200).json({ success: true });
     }
   } catch (e) {

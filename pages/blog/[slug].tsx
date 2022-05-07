@@ -16,7 +16,6 @@ import { default as oneDark } from 'react-syntax-highlighter/dist/cjs/styles/pri
 import moment from 'moment';
 import { LikeButton } from '@/components/LikeButton';
 import { useEffect } from 'react';
-import supabase from '@/lib/supabase';
 
 interface IParams extends ParsedUrlQuery {
   slug: string;
@@ -195,16 +194,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params as IParams;
-  const { data } = await supabase
-    .from('blog')
-    .select(
-      'id, title, description, img_provider, img_header_url, img_author, created_at, content, slug'
-    )
-    .match({ slug: slug });
+  const post = await prisma.blog.findFirst({
+    where: {
+      slug: slug,
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      img_provider: true,
+      img_header_url: true,
+      img_author: true,
+      created_at: true,
+      content: true,
+      slug: true,
+    },
+  });
 
   return {
     props: {
-      post: JSON.parse(JSON.stringify(data[0])),
+      post: JSON.parse(JSON.stringify(post)),
     },
   };
 };
