@@ -37,7 +37,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <motion.main
-          className="flex flex-col max-w-3xl w-full mx-auto pt-4"
+          className="flex flex-col max-w-3xl w-full mx-auto p-6"
           {...attributes}
         >
           {children}

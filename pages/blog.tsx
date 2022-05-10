@@ -26,7 +26,7 @@ const Blog: NextPage = ({ posts }: { posts: Post[] }) => {
   return (
     <Layout title="Blog" description="Landrae.dev Blog Page">
       <div className="flex flex-col max-w-3xl w-full mx-auto p-6">
-        <h1 className="text-4xl">Blog</h1>
+        <h1 className="text-4xl">Blog ✍️</h1>
         <p className="py-2">
           I wrote this blog in order to share my passion with you. Feel free to
           explore my personal blog and don&#39;t forget to leave a like!

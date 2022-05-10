@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import { Layout } from '@/components/layout';
+import { useRouter } from 'next/router';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import prisma from '@/lib/prisma';
@@ -35,6 +36,12 @@ const BlogPost: NextPage = ({ post }: { post: Post }) => {
       method: 'POST',
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Layout title={post?.title || 'Blog'} description={post?.description}>
       {post ? (

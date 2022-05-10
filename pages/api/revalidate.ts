@@ -11,8 +11,11 @@ export default async function handler(
 
   try {
     // Regenerate our index route showing the images
-    await res.unstable_revalidate(`${req.query.slug}`);
-    return res.json({ revalidated: true });
+    if (req.method == 'GET') {
+      await res.unstable_revalidate(`${req.query.slug}`);
+      return res.status(200).json({ revalidated: true });
+    }
+    return res.status(400).json({ error: 'Bad request' });
   } catch (e) {
     // If there was an error, Next.js will continue
     // to show the last successfully generated page

@@ -13,7 +13,7 @@ const Home: NextPage = () => {
   return (
     <Layout title="Home" description="Landrae's personal website portfolio">
       {/* Introduction-start */}
-      <div className="p-6">
+      <div className="my-3">
         <h1 className="text-5xl">Hi🐼,</h1>
         <p className="text-base md:text-lg">
           Welcome to my portfolio
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
       {/* Introduction-end */}
 
       {/* About-start */}
-      <div className="px-6 my-3">
+      <div className="my-3">
         <h1 className="text-3xl">About</h1>
         <div className="flex flex-col md:flex-row align-center justify-center md:justify-between">
           <div className="max-w-md">
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
       {/* About-end */}
 
       {/* Bio-start */}
-      <div className="px-6 my-3">
+      <div className="my-3">
         <div className="flex flex-col md:flex-row align-center justify-center md:justify-between">
           <div className="max-w-lg md:text-lg">
             <h1 className="text-3xl">Bio</h1>
