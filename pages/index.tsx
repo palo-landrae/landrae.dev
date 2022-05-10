@@ -3,6 +3,7 @@ import { Layout } from '@/components/layout';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { BioYear, BioSection } from '@/components/Bio';
+import { useEffect } from 'react';
 
 const Socials = dynamic(() =>
   import('@/components/Icons').then((mod) => mod.Socials)
@@ -11,6 +12,9 @@ const Socials = dynamic(() =>
 const Subscribe = dynamic(() => import('@/components/Subscribe'));
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    window.addEventListener('touchmove', () => {}, { passive: true });
+  }, []);
   return (
     <Layout title="Home" description="Landrae's personal website portfolio">
       {/* Introduction-start */}

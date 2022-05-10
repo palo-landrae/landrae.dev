@@ -45,7 +45,7 @@ const BlogPost: NextPage = ({ post }: { post: Post }) => {
   return (
     <Layout title={post?.title || 'Blog'} description={post?.description}>
       {post ? (
-        <div key={post.slug} className="flex flex-col p-6">
+        <div key={post.slug} className="flex flex-col">
           <div className="w-full relative min-w-sm">
             <Image
               alt="Blog post image"
