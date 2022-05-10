@@ -3,11 +3,12 @@ import { Layout } from '@/components/layout';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { BioYear, BioSection } from '@/components/Bio';
-import Subscribe from '@/components/Subscribe';
 
 const Socials = dynamic(() =>
   import('@/components/Icons').then((mod) => mod.Socials)
 );
+
+const Subscribe = dynamic(() => import('@/components/Subscribe'));
 
 const Home: NextPage = () => {
   return (
