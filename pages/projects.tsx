@@ -20,7 +20,7 @@ interface IProps {
 const Projects: NextPage<IProps> = ({ projects }) => {
   return (
     <Layout title="Projects" description="Landrae's Projects">
-      <div className="p-6">
+      <div className="my-3">
         <h1 className="text-4xl">Projects</h1>
         {projects &&
           projects.map((project) => {
