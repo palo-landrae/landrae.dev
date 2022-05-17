@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/generated/mongodb"
+}
+
+datasource mongodb {
+  provider = "mongodb"
+  url      = env("MONGODB_DATABASE_URL")
+}
+
+model blog {
+  id                String   @id @default(auto()) @map("_id") @mongodb.ObjectId
+  content           String
+  created_at        DateTime @mongodb.Date
+  description       String
+  file_name         String
+  img_author        String
+  img_header_url    String
+  img_provider      String
+  img_thumbnail_url String
+  slug              String
+  title             String
+}

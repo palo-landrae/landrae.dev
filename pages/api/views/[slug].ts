@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/lib/prisma';
+import { prisma_mysql } from '@/lib/prisma';
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,7 +9,7 @@ export default async function handler(
     const slug = req.query.slug.toString();
 
     if (req.method === 'POST') {
-      const result = await prisma.views.upsert({
+      const result = await prisma_mysql.views.upsert({
         where: { slug: slug },
         create: {
           slug: slug,
@@ -30,7 +30,7 @@ export default async function handler(
     }
 
     if (req.method === 'GET') {
-      const result = await prisma.views.findUnique({
+      const result = await prisma_mysql.views.findUnique({
         where: { slug: slug },
         select: { count: true },
       });

@@ -28,31 +28,30 @@ const Subscribe: React.FC = () => {
   }, [show]);
 
   useEffect(() => {
-    if (token) {
-      const onHCaptchaVerified = async () => {
-        const res = await fetch(`/api/subscribe`, {
-          body: JSON.stringify({
-            email: email,
-            captchaToken: token,
-          }),
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        const { error } = await res.json();
-        if (error) {
-          setIsError(true);
-          setMessage(error);
-          setShow(true);
-          return;
-        }
-        setIsError(false);
+    if (!token) return;
+    const onHCaptchaVerified = async () => {
+      const res = await fetch(`/api/subscribe`, {
+        body: JSON.stringify({
+          email: email,
+          captchaToken: token,
+        }),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const { error } = await res.json();
+      if (error) {
+        setIsError(true);
+        setMessage(error);
         setShow(true);
-        setEmail('');
-      };
-      onHCaptchaVerified();
-    }
+        return;
+      }
+      setIsError(false);
+      setShow(true);
+      setEmail('');
+    };
+    onHCaptchaVerified();
   }, [token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

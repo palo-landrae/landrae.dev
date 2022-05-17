@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { v4 as uuidv4 } from 'uuid';
-import prisma from '@/lib/prisma';
+import { prisma_mysql } from '@/lib/prisma';
 
 export default async function handle(
   req: NextApiRequest,
@@ -10,7 +10,7 @@ export default async function handle(
     const slug = req.query.params[0].toString();
     const sessionId = req.query.params[1].toString();
 
-    const data = await prisma.likes.findFirst({
+    const data = await prisma_mysql.likes.findFirst({
       where: {
         sessionID: sessionId,
         slug: slug,
@@ -26,12 +26,12 @@ export default async function handle(
 
     if (req.method == 'GET') {
       // query to count number of likes
-      const count = await prisma.likes.count({ where: { liked: true } });
+      const count = await prisma_mysql.likes.count({ where: { liked: true } });
       return res.status(200).json({ count: count, liked: liked });
     }
 
     if (req.method == 'POST') {
-      await prisma.likes.upsert({
+      await prisma_mysql.likes.upsert({
         where: {
           id: uid,
         },

@@ -1,0 +1,23 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+  output   = "../node_modules/@prisma/generated/mysql"
+}
+
+datasource planetscale {
+  provider             = "mysql"
+  url                  = env("MYSQL_DATABASE_URL")
+  referentialIntegrity = "prisma"
+}
+
+model likes {
+  id        String @id @planetscale.VarChar(36)
+  sessionID String @planetscale.VarChar(36)
+  slug      String @planetscale.VarChar(64)
+  liked     Boolean @default(false)
+}
+
+model views {
+  slug  String @id @planetscale.VarChar(64)
+  count Int    @default(1)
+}

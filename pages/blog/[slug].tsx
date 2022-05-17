@@ -4,7 +4,7 @@ import { Layout } from '@/components/layout';
 import { useRouter } from 'next/router';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
-import prisma from '@/lib/prisma';
+import { prisma_mongodb } from '@/lib/prisma';
 import { Post } from '@/lib/types';
 import { ParsedUrlQuery } from 'querystring';
 
@@ -182,7 +182,7 @@ const CodeBlock = ({ node, inline, className, children, ...props }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const getAllPostSlugs = await prisma.blog.findMany({
+  const getAllPostSlugs = await prisma_mongodb.blog.findMany({
     select: {
       slug: true,
     },
@@ -201,7 +201,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params as IParams;
-  const post = await prisma.blog.findFirst({
+  const post = await prisma_mongodb.blog.findFirst({
     where: {
       slug: slug,
     },

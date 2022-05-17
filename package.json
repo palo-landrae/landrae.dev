@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate --schema ./prisma/schema_mongodb.prisma && npx prisma generate --schema ./prisma/schema_mysql.prisma"
   },
   "cacheDirectories": [
     ".next/cache"
